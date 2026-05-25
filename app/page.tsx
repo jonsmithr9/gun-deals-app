@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -247,15 +248,19 @@ export default function Home() {
                   <p className="text-sm text-gray-400 mb-3">{deal.retailer}</p>
                   <h3 className="font-medium leading-tight mb-4 line-clamp-2">{deal.title}</h3>
 
-                  {/* Optional UPC / SKU */}
-                  {(deal.upc || deal.sku) && (
-                    <div className="text-[10px] text-gray-500 mb-4 space-y-0.5">
-                      {deal.upc && <div>UPC: {deal.upc}</div>}
-                      {deal.sku && <div>SKU: {deal.sku}</div>}
-                    </div>
-                  )}
-
-                  {savings > 0 && <div className="inline-block bg-green-600 text-white text-xs px-3 py-1 rounded-full mb-4">{savings}% OFF</div>}
+                  {/* Clickable UPC and SKU */}
+                  <div className="text-[10px] text-gray-500 mb-4 space-y-1">
+                    {deal.upc && (
+                      <Link href={`/product/${deal.upc}`} className="hover:text-orange-400 hover:underline cursor-pointer block">
+                        UPC: {deal.upc}
+                      </Link>
+                    )}
+                    {deal.sku && (
+                      <Link href={`/product/${deal.sku}`} className="hover:text-orange-400 hover:underline cursor-pointer block">
+                        SKU: {deal.sku}
+                      </Link>
+                    )}
+                  </div>
 
                   <div className="mb-5">
                     <p className="text-xs text-gray-500 mb-2">Price Trend (Last 5 Days)</p>
