@@ -77,10 +77,10 @@ export default function Home() {
           </h1>
 
           <div className="hidden md:flex items-center gap-8 text-sm">
-            <a href="/" className="hover:text-orange-400">Deals</a>
-            <a href="/alerts" className="hover:text-orange-400">🔔 Alerts</a>
-            <a href="/favorites" className="hover:text-orange-400">❤️ Favorites</a>
-            <a href="/account" className="hover:text-orange-400">👤 Account</a>
+            <a href="/" className="hover:text-orange-400 transition-colors">Deals</a>
+            <a href="/alerts" className="hover:text-orange-400 transition-colors">🔔 Alerts</a>
+            <a href="/favorites" className="hover:text-orange-400 transition-colors">❤️ Favorites</a>
+            <a href="/account" className="hover:text-orange-400 transition-colors">👤 Account</a>
           </div>
 
           <button 
@@ -130,10 +130,27 @@ export default function Home() {
             />
           </div>
         </div>
+
+        <div className="flex flex-wrap gap-2 mt-6">
+          {categories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${
+                selectedCategory === cat ? 'bg-orange-600 text-white' : 'bg-gray-900 border border-gray-700 hover:border-gray-600'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 pb-12">
-        <h2 className="text-2xl font-semibold mb-6">Hot Deals ({filteredDeals.length})</h2>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-semibold">Hot Deals Right Now ({filteredDeals.length})</h2>
+          {zipCode && <p className="text-orange-400">📍 Near {zipCode}</p>}
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredDeals.map((deal) => {
@@ -143,20 +160,61 @@ export default function Home() {
             const hasAlert = alerts.some(a => a.id === deal.id);
 
             return (
-              <div key={deal.id} className="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden hover:border-orange-500 transition-all relative">
-                <button onClick={() => toggleFavorite(deal.id)} className="absolute top-4 right-14 z-20 text-3xl">
+              <div 
+                key={deal.id} 
+                className="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden hover:border-orange-500 transition-all relative"
+              >
+                <button
+                  onClick={() => toggleFavorite(deal.id)}
+                  className="absolute top-4 right-14 z-20 text-3xl"
+                >
                   {isFavorite ? '❤️' : '♡'}
                 </button>
-                <button onClick={() => togglePriceAlert(deal)} className={`absolute top-4 right-4 z-20 text-2xl ${hasAlert ? 'text-yellow-400' : 'text-gray-400 hover:text-yellow-400'}`}>
+
+                <button
+                  onClick={() => togglePriceAlert(deal)}
+                  className={`absolute top-4 right-4 z-20 text-2xl ${hasAlert ? 'text-yellow-400' : 'text-gray-400 hover:text-yellow-400'}`}
+                >
                   {hasAlert ? '🔔' : '🔕'}
                 </button>
 
                 <img src={deal.image} alt={deal.title} className="w-full h-48 object-cover bg-gray-800" />
 
                 <div className="p-6">
-                  <p className="text-3xl font-bold text-orange-400">${deal.price}</p>
-                  <p className="text-gray-400">{deal.retailer}</p>
-                  <h3 className="mt-2 font-medium">{deal.title}</h3>
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <p className="text-3xl font-bold text-orange-400">${deal.price}</p>
+                      {deal.oldPrice && <p className="text-sm line-through text-gray-500">${deal.oldPrice}</p>}
+                    </div>
+                    <div className="text-yellow-400">★ {deal.rating}</div>
+                  </div>
+
+                  <p className="text-sm text-gray-400 mb-3">{deal.retailer}</p>
+                  <h3 className="font-medium leading-tight mb-4 line-clamp-2">{deal.title}</h3>
+
+                  {savings > 0 && (
+                    <div className="inline-block bg-green-600 text-white text-xs px-3 py-1 rounded-full mb-4">
+                      {savings}% OFF
+                    </div>
+                  )}
+
+                  <div className="bg-gray-950 border border-gray-700 rounded-2xl p-4 mb-5 text-sm">
+                    <div className="flex justify-between mb-1">
+                      <span className="text-gray-400">True Cost (est.)</span>
+                      <span className="font-bold text-orange-400">${trueCost}</span>
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      +${deal.shipping} shipping + ~${deal.fflFee} FFL
+                    </div>
+                  </div>
+
+                  <a
+                    href={deal.link}
+                    target="_blank"
+                    className="block w-full bg-orange-600 hover:bg-orange-500 text-center py-4 rounded-2xl font-medium transition-colors"
+                  >
+                    Visit Deal →
+                  </a>
                 </div>
               </div>
             );
