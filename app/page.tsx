@@ -75,9 +75,9 @@ export default function Home() {
     if (history.length < 2) return 'bg-orange-500';
     const first = history[0];
     const last = history[history.length - 1];
-    if (last < first) return 'bg-green-500';      // Downward = Good
-    if (last > first) return 'bg-red-500';        // Upward = Bad
-    return 'bg-orange-500';                       // Stable
+    if (last < first * 0.97) return 'bg-green-500';      // Clear downward trend
+    if (last > first * 1.03) return 'bg-red-500';        // Clear upward trend
+    return 'bg-orange-500';                              // Stable / mixed
   };
 
   return (
@@ -211,7 +211,7 @@ export default function Home() {
                     </div>
                   )}
 
-                  {/* Improved Color-Coded Price History */}
+                  {/* Color-Coded Price History */}
                   <div className="mb-5">
                     <p className="text-xs text-gray-500 mb-2">Price Trend (Last 5 Days)</p>
                     <div className="flex items-end gap-1 h-14 bg-gray-950 rounded-xl p-2 relative">
