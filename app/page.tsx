@@ -71,13 +71,12 @@ export default function Home() {
   const percentOff = (oldPrice: number | undefined, price: number) => 
     oldPrice ? Math.round(((oldPrice - price) / oldPrice) * 100) : 0;
 
-  // Color-coded trend logic
   const getTrendColor = (history: number[]) => {
     if (history.length < 2) return 'bg-orange-500';
     const first = history[0];
     const last = history[history.length - 1];
-    if (last < first * 0.97) return 'bg-green-500';   // Downward trend (good)
-    if (last > first * 1.03) return 'bg-red-500';     // Upward trend (bad)
+    if (last < first * 0.97) return 'bg-green-500';   // Downward = Good
+    if (last > first * 1.03) return 'bg-red-500';     // Upward = Bad
     return 'bg-orange-500';                           // Stable
   };
 
