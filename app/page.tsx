@@ -127,8 +127,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      <header className="bg-black/95 backdrop-blur-lg border-b border-gray-800 sticky top-0 z-50">
+    <div className="min-h-screen bg-gray-950 text-white">
+      <header className="bg-black/90 backdrop-blur-md border-b border-gray-800 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
             My<span className="text-orange-500">GunDeals</span>
@@ -224,7 +224,7 @@ export default function Home() {
             const maxPrice = Math.max(...deal.priceHistory);
 
             return (
-              <div key={deal.id} className="bg-[#111111] border border-gray-800 rounded-3xl overflow-hidden hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/10 transition-all relative group">
+              <div key={deal.id} className="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/10 transition-all relative group">
                 <button onClick={() => toggleFavorite(deal.id)} className="absolute top-4 right-14 z-20 text-3xl active:scale-125 transition-transform">{isFavorite ? '❤️' : '♡'}</button>
                 <button onClick={() => togglePriceAlert(deal)} className={`absolute top-4 right-4 z-20 text-2xl ${hasAlert ? 'text-yellow-400' : 'text-gray-400 hover:text-yellow-400'} active:scale-125 transition-transform`}>{hasAlert ? '🔔' : '🔕'}</button>
 
@@ -260,13 +260,19 @@ export default function Home() {
                       {deal.priceHistory.map((p, i) => (
                         <div 
                           key={i} 
-                          className={`${trendColor} hover:brightness-110 rounded-t flex-1 transition-all relative group cursor-help`} 
+                          className={`${trendColor} rounded-t flex-1 transition-all relative group`} 
                           style={{ height: `${(p / maxPrice) * 100}%` }}
                         >
-                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-30">
+                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-30">
                             ${p.toFixed(2)}
                           </div>
                         </div>
+                      ))}
+                    </div>
+                    {/* Permanent price labels underneath */}
+                    <div className="flex justify-between text-[10px] text-gray-500 mt-1 px-1">
+                      {deal.priceHistory.map((p, i) => (
+                        <div key={i} className="text-center w-1/5">${p.toFixed(0)}</div>
                       ))}
                     </div>
                   </div>
