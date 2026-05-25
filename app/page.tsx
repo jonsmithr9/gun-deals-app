@@ -56,19 +56,12 @@ export default function Home() {
   const categories = ['All', 'Rifles', 'Ammo', 'Optics', 'Handguns', 'Parts'];
 
   const deals = [
-    // Green (downward)
     { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, oldPrice: 449.99, retailer: "Palmetto State Armory", category: "Rifles", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", rating: 4.8, shipping: 12.99, fflFee: 25, priceHistory: [479, 459, 439, 419, 399.99], inStock: true },
     { id: 2, title: "Glock 19 Gen5 9mm Pistol", price: 499.99, oldPrice: 549.99, retailer: "Primary Arms", category: "Handguns", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.9, shipping: 12.99, fflFee: 25, priceHistory: [569, 549, 529, 509, 499.99], inStock: true },
-    
-    // Red (upward)
     { id: 3, title: "Daniel Defense DDM4 V7 5.56", price: 1899.99, oldPrice: 1799.99, retailer: "Primary Arms", category: "Rifles", link: "#", image: "https://picsum.photos/id/201/600/400", rating: 4.9, shipping: 19.99, fflFee: 25, priceHistory: [1699, 1749, 1799, 1849, 1899.99], inStock: true },
     { id: 4, title: "Vortex Viper PST Gen II 3-15x44", price: 699.99, oldPrice: 649.99, retailer: "MidwayUSA", category: "Optics", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.9, shipping: 0, fflFee: 0, priceHistory: [599, 629, 659, 679, 699.99], inStock: true },
-
-    // Yellow (stable)
     { id: 5, title: "Holosun HS507C-X2 Red Dot", price: 229.99, oldPrice: 239.99, retailer: "Primary Arms", category: "Optics", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.8, shipping: 0, fflFee: 0, priceHistory: [229.99, 229.99, 229.99, 229.99, 229.99], inStock: true },
     { id: 6, title: "Magpul MOE Carbine Stock", price: 44.99, oldPrice: 49.99, retailer: "Primary Arms", category: "Parts", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.8, shipping: 8.99, fflFee: 0, priceHistory: [44.99, 44.99, 44.99, 44.99, 44.99], inStock: true },
-
-    // Mixed
     { id: 7, title: "Sig Sauer P320 Compact 9mm", price: 449.99, oldPrice: 479.99, retailer: "Sportsman's Warehouse", category: "Handguns", link: "#", image: "https://picsum.photos/id/201/600/400", rating: 4.7, shipping: 0, fflFee: 25, priceHistory: [489, 469, 459, 439, 449.99], inStock: true },
     { id: 8, title: "Federal American Eagle 5.56 - 420 Rounds", price: 189.99, oldPrice: 219.99, retailer: "Ammo.com", category: "Ammo", link: "#", image: "https://picsum.photos/id/1074/600/400", rating: 4.8, shipping: 0, fflFee: 0, priceHistory: [229, 199, 219, 179.99, 189.99], inStock: true },
     { id: 9, title: "Streamlight TLR-7A Weapon Light", price: 139.99, oldPrice: 159.99, retailer: "Palmetto State Armory", category: "Parts", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.7, shipping: 0, fflFee: 0, priceHistory: [159, 149, 139.99, 139.99, 139.99], inStock: true },
@@ -125,7 +118,7 @@ export default function Home() {
     oldPrice ? Math.round(((oldPrice - price) / oldPrice) * 100) : 0;
 
   const getBarColor = (prev: number, current: number) => {
-    if (Math.abs(current - prev) < 0.5) return 'bg-yellow-500'; // Stable
+    if (Math.abs(current - prev) < 0.5) return 'bg-yellow-400'; // Bright bumblebee yellow for stable
     return current < prev ? 'bg-green-500' : 'bg-red-500';
   };
 
@@ -261,7 +254,7 @@ export default function Home() {
                     <div className="flex items-end gap-1 h-14 bg-gray-950 rounded-xl p-2 relative">
                       {deal.priceHistory.map((p, i) => {
                         const prev = i > 0 ? deal.priceHistory[i-1] : p;
-                        const barColor = Math.abs(p - prev) < 0.5 ? 'bg-yellow-500' : (p < prev ? 'bg-green-500' : 'bg-red-500');
+                        const barColor = Math.abs(p - prev) < 0.5 ? 'bg-yellow-400' : (p < prev ? 'bg-green-500' : 'bg-red-500');
                         return (
                           <div 
                             key={i} 
