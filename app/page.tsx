@@ -260,17 +260,13 @@ export default function Home() {
                       {deal.priceHistory.map((p, i) => (
                         <div 
                           key={i} 
-                          className={`${trendColor} rounded-t flex-1 transition-all relative group`} 
+                          className={`${trendColor} rounded-t flex-1 transition-all`} 
                           style={{ height: `${(p / maxPrice) * 100}%` }}
-                        >
-                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-30">
-                            ${p.toFixed(2)}
-                          </div>
-                        </div>
+                        />
                       ))}
                     </div>
-                    {/* Permanent price labels underneath */}
-                    <div className="flex justify-between text-[10px] text-gray-500 mt-1 px-1">
+                    {/* Permanent price labels */}
+                    <div className="flex justify-between text-[10px] text-gray-400 mt-1 px-1">
                       {deal.priceHistory.map((p, i) => (
                         <div key={i} className="text-center w-1/5">${p.toFixed(0)}</div>
                       ))}
