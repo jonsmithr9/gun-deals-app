@@ -234,14 +234,17 @@ export default function Home() {
             const isFavorite = favorites.includes(deal.id);
             const hasAlert = alerts.some(a => a.id === deal.id);
             const trendColor = getTrendColor(deal.priceHistory);
-
-            // Dynamic max for better scaling
             const maxPrice = Math.max(...deal.priceHistory);
 
             return (
               <div key={deal.id} className="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden hover:border-orange-500 transition-all relative">
                 <button onClick={() => toggleFavorite(deal.id)} className="absolute top-4 right-14 z-20 text-3xl">{isFavorite ? '❤️' : '♡'}</button>
                 <button onClick={() => togglePriceAlert(deal)} className={`absolute top-4 right-4 z-20 text-2xl ${hasAlert ? 'text-yellow-400' : 'text-gray-400 hover:text-yellow-400'}`}>{hasAlert ? '🔔' : '🔕'}</button>
+
+                {/* In Stock Badge */}
+                <div className={`absolute top-4 left-4 z-20 px-3 py-1 text-xs font-bold rounded-full ${deal.inStock ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}>
+                  {deal.inStock ? '✅ IN STOCK' : '❌ OUT OF STOCK'}
+                </div>
 
                 <img src={deal.image} alt={deal.title} className="w-full h-48 object-cover bg-gray-800" />
 
