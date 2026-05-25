@@ -56,20 +56,44 @@ export default function Home() {
   const categories = ['All', 'Rifles', 'Ammo', 'Optics', 'Handguns', 'Parts'];
 
   const deals = [
+    // Rifles
     { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, oldPrice: 449.99, retailer: "Palmetto State Armory", category: "Rifles", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", rating: 4.8, shipping: 12.99, fflFee: 25, priceHistory: [459, 429, 449, 399, 399.99], inStock: true },
-    { id: 2, title: "Federal American Eagle 5.56x45 55gr FMJ - 420 Rounds", price: 189.99, oldPrice: 219.99, retailer: "Ammo.com", category: "Ammo", link: "https://ammo.com", image: "https://picsum.photos/id/1074/600/400", rating: 4.9, shipping: 0, fflFee: 0, priceHistory: [229, 209, 199, 189.99, 189.99], inStock: true },
-    { id: 3, title: "Holosun HS507C-X2 Red Dot Sight", price: 229.99, oldPrice: 259.99, retailer: "Primary Arms", category: "Optics", link: "https://primaryarms.com", image: "https://picsum.photos/id/201/600/400", rating: 4.7, shipping: 9.99, fflFee: 0, priceHistory: [259, 249, 239, 229.99, 229.99], inStock: true },
-    { id: 4, title: "PSA AR-15 Stealth Stripped Lower Receiver", price: 59.99, oldPrice: 79.99, retailer: "Palmetto State Armory", category: "Parts", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 8.99, fflFee: 25, priceHistory: [89, 79, 69, 59.99, 59.99], inStock: false },
-    { id: 5, title: "Glock 43X MOS 9mm Pistol", price: 449.99, oldPrice: 499.99, retailer: "Sportsman's Warehouse", category: "Handguns", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.8, shipping: 14.99, fflFee: 25, priceHistory: [499, 479, 459, 449.99, 449.99], inStock: true },
-    { id: 6, title: "Hornady 5.56x45 55gr FMJ - 500 Rounds", price: 229.99, oldPrice: 269.99, retailer: "Target Sports USA", category: "Ammo", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.5, shipping: 0, fflFee: 0, priceHistory: [279, 259, 249, 229.99, 229.99], inStock: true },
+    { id: 2, title: "Ruger AR-556 5.56 NATO Rifle", price: 689.99, oldPrice: 749.99, retailer: "Sportsman's Warehouse", category: "Rifles", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.7, shipping: 14.99, fflFee: 25, priceHistory: [749, 719, 699, 689.99, 689.99], inStock: true },
+    { id: 3, title: "Daniel Defense DDM4 V7 5.56", price: 1899.99, oldPrice: 1999.99, retailer: "Primary Arms", category: "Rifles", link: "#", image: "https://picsum.photos/id/201/600/400", rating: 4.9, shipping: 19.99, fflFee: 25, priceHistory: [1999, 1950, 1929, 1899.99, 1899.99], inStock: true },
+    { id: 4, title: "Smith & Wesson M&P15 Sport II", price: 549.99, oldPrice: 599.99, retailer: "GunBroker", category: "Rifles", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.6, shipping: 15.99, fflFee: 25, priceHistory: [599, 579, 559, 549.99, 549.99], inStock: false },
+    { id: 5, title: "Sig Sauer MCX Virtus Patrol", price: 2299.99, oldPrice: 2499.99, retailer: "Palmetto State Armory", category: "Rifles", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.8, shipping: 24.99, fflFee: 25, priceHistory: [2499, 2399, 2329, 2299.99, 2299.99], inStock: true },
+
+    // Handguns
+    { id: 6, title: "Glock 19 Gen5 9mm Pistol", price: 499.99, oldPrice: 549.99, retailer: "Primary Arms", category: "Handguns", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.9, shipping: 12.99, fflFee: 25, priceHistory: [549, 529, 509, 499.99, 499.99], inStock: true },
+    { id: 7, title: "Sig Sauer P320 Compact 9mm", price: 449.99, oldPrice: 499.99, retailer: "Sportsman's Warehouse", category: "Handguns", link: "#", image: "https://picsum.photos/id/201/600/400", rating: 4.7, shipping: 0, fflFee: 25, priceHistory: [499, 479, 459, 449.99, 449.99], inStock: true },
+    { id: 8, title: "Smith & Wesson Shield Plus 9mm", price: 379.99, oldPrice: 429.99, retailer: "Palmetto State Armory", category: "Handguns", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.8, shipping: 9.99, fflFee: 25, priceHistory: [429, 409, 389, 379.99, 379.99], inStock: true },
+    { id: 9, title: "Ruger LCP II .380 ACP", price: 249.99, oldPrice: 289.99, retailer: "Ammo.com", category: "Handguns", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.5, shipping: 8.99, fflFee: 25, priceHistory: [289, 269, 259, 249.99, 249.99], inStock: false },
+
+    // Optics
+    { id: 10, title: "Holosun HS507C-X2 Red Dot", price: 229.99, oldPrice: 259.99, retailer: "Primary Arms", category: "Optics", link: "#", image: "https://picsum.photos/id/201/600/400", rating: 4.8, shipping: 0, fflFee: 0, priceHistory: [259, 249, 239, 229.99, 229.99], inStock: true },
+    { id: 11, title: "Vortex Viper PST Gen II 3-15x44", price: 699.99, oldPrice: 799.99, retailer: "MidwayUSA", category: "Optics", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.9, shipping: 0, fflFee: 0, priceHistory: [799, 749, 719, 699.99, 699.99], inStock: true },
+    { id: 12, title: "EOTech EXPS3-0 Holographic Sight", price: 599.99, oldPrice: 649.99, retailer: "Palmetto State Armory", category: "Optics", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.7, shipping: 12.99, fflFee: 0, priceHistory: [649, 629, 609, 599.99, 599.99], inStock: true },
+    { id: 13, title: "Sig Sauer Romeo5 Red Dot", price: 129.99, oldPrice: 149.99, retailer: "Sportsman's Warehouse", category: "Optics", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.6, shipping: 0, fflFee: 0, priceHistory: [149, 139, 129.99, 129.99, 129.99], inStock: true },
+
+    // Ammo
+    { id: 14, title: "Federal American Eagle 5.56 55gr FMJ - 420 Rounds", price: 189.99, oldPrice: 219.99, retailer: "Ammo.com", category: "Ammo", link: "#", image: "https://picsum.photos/id/1074/600/400", rating: 4.8, shipping: 0, fflFee: 0, priceHistory: [229, 209, 199, 189.99, 189.99], inStock: true },
+    { id: 15, title: "Hornady 9mm 115gr FMJ - 500 Rounds", price: 149.99, oldPrice: 169.99, retailer: "Target Sports USA", category: "Ammo", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.7, shipping: 0, fflFee: 0, priceHistory: [179, 169, 159, 149.99, 149.99], inStock: true },
+    { id: 16, title: "Blazer Brass 9mm 124gr - 1000 Rounds", price: 289.99, oldPrice: 319.99, retailer: "Palmetto State Armory", category: "Ammo", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 24.99, fflFee: 0, priceHistory: [319, 299, 289.99, 289.99, 289.99], inStock: false },
+    { id: 17, title: "Winchester White Box 5.56 55gr - 300 Rounds", price: 139.99, oldPrice: 159.99, retailer: "MidwayUSA", category: "Ammo", link: "#", image: "https://picsum.photos/id/1015/600/400", rating: 4.5, shipping: 19.99, fflFee: 0, priceHistory: [159, 149, 139.99, 139.99, 139.99], inStock: true },
+
+    // Accessories
+    { id: 18, title: "Magpul MOE Carbine Stock", price: 44.99, oldPrice: 54.99, retailer: "Primary Arms", category: "Parts", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.8, shipping: 8.99, fflFee: 0, priceHistory: [54.99, 49.99, 44.99, 44.99, 44.99], inStock: true },
+    { id: 19, title: "Streamlight TLR-7A Weapon Light", price: 139.99, oldPrice: 159.99, retailer: "Palmetto State Armory", category: "Parts", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.7, shipping: 0, fflFee: 0, priceHistory: [159, 149, 139.99, 139.99, 139.99], inStock: true },
+    { id: 20, title: "Blue Force Gear Vickers Sling", price: 69.99, oldPrice: 79.99, retailer: "MidwayUSA", category: "Parts", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.9, shipping: 0, fflFee: 0, priceHistory: [79.99, 74.99, 69.99, 69.99, 69.99], inStock: true },
   ];
+
+  // ... (rest of the filtering and return logic remains the same as the previous version)
 
   let filteredDeals = deals.filter(deal => {
     const matchesCategory = selectedCategory === 'All' || deal.category === selectedCategory;
     const matchesSearch = deal.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
                          deal.retailer.toLowerCase().includes(searchTerm.toLowerCase());
     
-    // Price Range Filter
     let matchesPrice = true;
     if (priceRange !== 'all') {
       const p = deal.price;
@@ -87,7 +111,6 @@ export default function Home() {
     return matchesCategory && matchesSearch && matchesPrice && matchesStock && matchesShipping;
   });
 
-  // Sorting
   if (sortOption === 'price-low') filteredDeals.sort((a, b) => a.price - b.price);
   else if (sortOption === 'price-high') filteredDeals.sort((a, b) => b.price - a.price);
   else if (sortOption === 'discount') {
@@ -117,6 +140,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
+      {/* Header, Search, Filters, and Toggles are the same as previous version */}
       <header className="bg-black border-b border-gray-800 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <h1 className="text-3xl font-bold tracking-tight">
@@ -130,10 +154,7 @@ export default function Home() {
             <a href="/account" className="hover:text-orange-400 transition-colors">👤 Account</a>
           </div>
 
-          <button 
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-3xl focus:outline-none"
-          >
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-3xl focus:outline-none">
             {isMobileMenuOpen ? '✕' : '☰'}
           </button>
         </div>
@@ -157,20 +178,12 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-6 pt-8 pb-6">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="relative flex-1">
-            <input
-              type="text"
-              placeholder="Search rifles, 9mm, optics, PSA..."
-              className="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 text-lg focus:outline-none focus:border-orange-500"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            <input type="text" placeholder="Search rifles, 9mm, optics, PSA..." className="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 text-lg focus:outline-none focus:border-orange-500" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
             <div className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-500">🔍</div>
           </div>
 
-          {/* Sort */}
           <div className="w-full md:w-64">
-            <select value={sortOption} onChange={(e) => setSortOption(e.target.value as any)}
-              className="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 focus:outline-none focus:border-orange-500">
+            <select value={sortOption} onChange={(e) => setSortOption(e.target.value as any)} className="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 focus:outline-none focus:border-orange-500">
               <option value="price-low">Sort: Price Low to High</option>
               <option value="price-high">Sort: Price High to Low</option>
               <option value="discount">Sort: % Off Highest</option>
@@ -178,10 +191,8 @@ export default function Home() {
             </select>
           </div>
 
-          {/* Price Range */}
           <div className="w-full md:w-64">
-            <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)}
-              className="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 focus:outline-none focus:border-orange-500">
+            <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)} className="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 focus:outline-none focus:border-orange-500">
               <option value="all">All Prices</option>
               <option value="under100">Under $100</option>
               <option value="100-299">$100 – $299</option>
@@ -193,7 +204,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Toggles */}
         <div className="flex flex-wrap gap-6 mt-4 text-sm">
           <label className="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" checked={inStockOnly} onChange={(e) => setInStockOnly(e.target.checked)} className="w-5 h-5 accent-orange-500" />
@@ -207,13 +217,7 @@ export default function Home() {
 
         <div className="flex flex-wrap gap-2 mt-6">
           {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${
-                selectedCategory === cat ? 'bg-orange-600 text-white' : 'bg-gray-900 border border-gray-700 hover:border-gray-600'
-              }`}
-            >
+            <button key={cat} onClick={() => setSelectedCategory(cat)} className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${selectedCategory === cat ? 'bg-orange-600 text-white' : 'bg-gray-900 border border-gray-700 hover:border-gray-600'}`}>
               {cat}
             </button>
           ))}
@@ -260,7 +264,7 @@ export default function Home() {
                     <div className="flex items-end gap-1 h-14 bg-gray-950 rounded-xl p-2 relative">
                       {deal.priceHistory.map((p, i) => (
                         <div key={i} className={`${trendColor} hover:brightness-110 rounded-t flex-1 transition-all relative group`} style={{ height: `${(p / 500) * 100}%` }}>
-                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none z-30">${p}</div>
+                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-30">${p}</div>
                         </div>
                       ))}
                     </div>
