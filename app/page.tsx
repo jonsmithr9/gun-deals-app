@@ -51,12 +51,12 @@ export default function Home() {
   const categories = ['All', 'Rifles', 'Ammo', 'Optics', 'Handguns', 'Parts'];
 
   const deals = [
-    { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, oldPrice: 449.99, retailer: "Palmetto State Armory", category: "Rifles", link: "https://palmettostatearmory.com", image: "https://m.media-amazon.com/images/I/61Z8X9X8+ZL._AC_SL1500_.jpg", rating: 4.8, shipping: 12.99, fflFee: 25 },
-    { id: 2, title: "Federal American Eagle 5.56x45 55gr FMJ - 420 Rounds", price: 189.99, oldPrice: 219.99, retailer: "Ammo.com", category: "Ammo", link: "https://ammo.com", image: "https://m.media-amazon.com/images/I/81f5z5X8+ZL._AC_SL1500_.jpg", rating: 4.9, shipping: 19.99, fflFee: 0 },
-    { id: 3, title: "Holosun HS507C-X2 Red Dot Sight", price: 229.99, oldPrice: 259.99, retailer: "Primary Arms", category: "Optics", link: "https://primaryarms.com", image: "https://m.media-amazon.com/images/I/71f5z5X8+ZL._AC_SL1500_.jpg", rating: 4.7, shipping: 9.99, fflFee: 0 },
-    { id: 4, title: "PSA AR-15 Stealth Stripped Lower Receiver", price: 59.99, oldPrice: 79.99, retailer: "Palmetto State Armory", category: "Parts", link: "https://palmettostatearmory.com", image: "https://m.media-amazon.com/images/I/61Z8X9X8+ZL._AC_SL1500_.jpg", rating: 4.6, shipping: 8.99, fflFee: 25 },
-    { id: 5, title: "Glock 43X MOS 9mm Pistol", price: 449.99, oldPrice: 499.99, retailer: "Sportsman's Warehouse", category: "Handguns", link: "#", image: "https://m.media-amazon.com/images/I/71f5z5X8+ZL._AC_SL1500_.jpg", rating: 4.8, shipping: 14.99, fflFee: 25 },
-    { id: 6, title: "Hornady 5.56x45 55gr FMJ - 500 Rounds", price: 229.99, oldPrice: 269.99, retailer: "Target Sports USA", category: "Ammo", link: "#", image: "https://m.media-amazon.com/images/I/81f5z5X8+ZL._AC_SL1500_.jpg", rating: 4.5, shipping: 24.99, fflFee: 0 },
+    { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, oldPrice: 449.99, retailer: "Palmetto State Armory", category: "Rifles", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", rating: 4.8, shipping: 12.99, fflFee: 25 },
+    { id: 2, title: "Federal American Eagle 5.56x45 55gr FMJ - 420 Rounds", price: 189.99, oldPrice: 219.99, retailer: "Ammo.com", category: "Ammo", link: "https://ammo.com", image: "https://picsum.photos/id/1074/600/400", rating: 4.9, shipping: 19.99, fflFee: 0 },
+    { id: 3, title: "Holosun HS507C-X2 Red Dot Sight", price: 229.99, oldPrice: 259.99, retailer: "Primary Arms", category: "Optics", link: "https://primaryarms.com", image: "https://picsum.photos/id/201/600/400", rating: 4.7, shipping: 9.99, fflFee: 0 },
+    { id: 4, title: "PSA AR-15 Stealth Stripped Lower Receiver", price: 59.99, oldPrice: 79.99, retailer: "Palmetto State Armory", category: "Parts", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 8.99, fflFee: 25 },
+    { id: 5, title: "Glock 43X MOS 9mm Pistol", price: 449.99, oldPrice: 499.99, retailer: "Sportsman's Warehouse", category: "Handguns", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.8, shipping: 14.99, fflFee: 25 },
+    { id: 6, title: "Hornady 5.56x45 55gr FMJ - 500 Rounds", price: 229.99, oldPrice: 269.99, retailer: "Target Sports USA", category: "Ammo", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.5, shipping: 24.99, fflFee: 0 },
   ];
 
   const filteredDeals = deals.filter(deal => 
