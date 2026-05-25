@@ -246,6 +246,13 @@ export default function Home() {
                   {deal.inStock ? '✅ IN STOCK' : '❌ OUT OF STOCK'}
                 </div>
 
+                {/* Free Shipping Badge - only shows if shipping is free */}
+                {deal.shipping === 0 && (
+                  <div className="absolute top-4 left-4 z-20 px-3 py-1 text-xs font-bold rounded-full bg-blue-600 text-white ml-28">
+                    🚚 FREE SHIPPING
+                  </div>
+                )}
+
                 <img src={deal.image} alt={deal.title} className="w-full h-48 object-cover bg-gray-800" />
 
                 <div className="p-6">
