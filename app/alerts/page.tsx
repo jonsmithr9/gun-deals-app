@@ -11,15 +11,17 @@ const mockDeals = [
   { id: 6, title: "Hornady 5.56x45 55gr FMJ - 500 Rounds", price: 229.99, retailer: "Target Sports USA", image: "https://picsum.photos/id/107/600/400" },
 ];
 
-export default function Favorites() {
-  const [favorites, setFavorites] = useState<number[]>([]);
+export default function Alerts() {
+  const [alerts, setAlerts] = useState<any[]>([]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('favorites');
-    if (saved) setFavorites(JSON.parse(saved));
+    const savedAlerts = localStorage.getItem('priceAlerts');
+    if (savedAlerts) setAlerts(JSON.parse(savedAlerts));
   }, []);
 
-  const favoritedDeals = mockDeals.filter(deal => favorites.includes(deal.id));
+  const activeAlerts = mockDeals.filter(deal => 
+    alerts.some(a => a.id === deal.id)
+  );
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
@@ -34,15 +36,15 @@ export default function Favorites() {
 
       <div className="max-w-7xl mx-auto px-6 py-12">
         <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
-          ❤️ My Favorites 
-          <span className="text-2xl text-orange-400">({favoritedDeals.length})</span>
+          🔔 My Price Alerts 
+          <span className="text-2xl text-orange-400">({activeAlerts.length})</span>
         </h2>
 
-        {favoritedDeals.length === 0 ? (
+        {activeAlerts.length === 0 ? (
           <div className="text-center py-24 text-gray-400">
-            <div className="text-6xl mb-6">♡</div>
-            <p className="text-xl">No favorites yet.</p>
-            <p className="mt-2">Go back and heart some deals on the main page!</p>
+            <div className="text-6xl mb-6">🔕</div>
+            <p className="text-xl">No price alerts set yet.</p>
+            <p className="mt-2">Click the bell icon on any deal on the main page to get notified when prices drop.</p>
             <a 
               href="/" 
               className="mt-8 inline-block bg-orange-600 hover:bg-orange-500 px-8 py-4 rounded-2xl font-medium"
@@ -52,10 +54,10 @@ export default function Favorites() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {favoritedDeals.map(deal => (
+            {activeAlerts.map(deal => (
               <div 
                 key={deal.id} 
-                className="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden hover:border-orange-500 transition-all"
+                className="bg-gray-900 border border-green-700 rounded-3xl overflow-hidden hover:border-orange-500 transition-all"
               >
                 <img 
                   src={deal.image} 
@@ -67,6 +69,11 @@ export default function Favorites() {
                   <p className="text-gray-400 mt-1">{deal.retailer}</p>
                   <h3 className="mt-3 font-medium leading-tight line-clamp-2">{deal.title}</h3>
                   
+                  <div className="mt-6 bg-green-900/50 border border-green-700 rounded-2xl p-4 text-sm">
+                    <p className="text-green-400 font-medium">🔔 Price Alert Active</p>
+                    <p className="text-xs text-gray-400 mt-1">You'll be notified if the price drops below your target.</p>
+                  </div>
+
                   <a
                     href="/"
                     className="block mt-6 w-full bg-orange-600 hover:bg-orange-500 text-center py-4 rounded-2xl font-medium transition-colors"
