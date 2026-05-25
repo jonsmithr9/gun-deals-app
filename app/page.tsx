@@ -5,7 +5,11 @@ import { useState, useEffect } from 'react';
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [sortOption, setSortOption] = useState<'price-low' | 'price-high' | 'discount'>('price-low');
+  const [sortOption, setSortOption] = useState<'price-low' | 'price-high' | 'discount' | 'newest'>('price-low');
+  const [priceRange, setPriceRange] = useState('all');
+  const [inStockOnly, setInStockOnly] = useState(false);
+  const [freeShippingOnly, setFreeShippingOnly] = useState(false);
+  
   const [zipCode, setZipCode] = useState('');
   const [favorites, setFavorites] = useState<number[]>([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -52,31 +56,48 @@ export default function Home() {
   const categories = ['All', 'Rifles', 'Ammo', 'Optics', 'Handguns', 'Parts'];
 
   const deals = [
-    { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, oldPrice: 449.99, retailer: "Palmetto State Armory", category: "Rifles", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", rating: 4.8, shipping: 12.99, fflFee: 25, priceHistory: [459, 429, 449, 399, 399.99] },
-    { id: 2, title: "Federal American Eagle 5.56x45 55gr FMJ - 420 Rounds", price: 189.99, oldPrice: 219.99, retailer: "Ammo.com", category: "Ammo", link: "https://ammo.com", image: "https://picsum.photos/id/1074/600/400", rating: 4.9, shipping: 19.99, fflFee: 0, priceHistory: [229, 209, 199, 189.99, 189.99] },
-    { id: 3, title: "Holosun HS507C-X2 Red Dot Sight", price: 229.99, oldPrice: 259.99, retailer: "Primary Arms", category: "Optics", link: "https://primaryarms.com", image: "https://picsum.photos/id/201/600/400", rating: 4.7, shipping: 9.99, fflFee: 0, priceHistory: [259, 249, 239, 229.99, 229.99] },
-    { id: 4, title: "PSA AR-15 Stealth Stripped Lower Receiver", price: 59.99, oldPrice: 79.99, retailer: "Palmetto State Armory", category: "Parts", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 8.99, fflFee: 25, priceHistory: [89, 79, 69, 59.99, 59.99] },
-    { id: 5, title: "Glock 43X MOS 9mm Pistol", price: 449.99, oldPrice: 499.99, retailer: "Sportsman's Warehouse", category: "Handguns", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.8, shipping: 14.99, fflFee: 25, priceHistory: [499, 479, 459, 449.99, 449.99] },
-    { id: 6, title: "Hornady 5.56x45 55gr FMJ - 500 Rounds", price: 229.99, oldPrice: 269.99, retailer: "Target Sports USA", category: "Ammo", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.5, shipping: 24.99, fflFee: 0, priceHistory: [279, 259, 249, 229.99, 229.99] },
+    { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, oldPrice: 449.99, retailer: "Palmetto State Armory", category: "Rifles", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", rating: 4.8, shipping: 12.99, fflFee: 25, priceHistory: [459, 429, 449, 399, 399.99], inStock: true },
+    { id: 2, title: "Federal American Eagle 5.56x45 55gr FMJ - 420 Rounds", price: 189.99, oldPrice: 219.99, retailer: "Ammo.com", category: "Ammo", link: "https://ammo.com", image: "https://picsum.photos/id/1074/600/400", rating: 4.9, shipping: 0, fflFee: 0, priceHistory: [229, 209, 199, 189.99, 189.99], inStock: true },
+    { id: 3, title: "Holosun HS507C-X2 Red Dot Sight", price: 229.99, oldPrice: 259.99, retailer: "Primary Arms", category: "Optics", link: "https://primaryarms.com", image: "https://picsum.photos/id/201/600/400", rating: 4.7, shipping: 9.99, fflFee: 0, priceHistory: [259, 249, 239, 229.99, 229.99], inStock: true },
+    { id: 4, title: "PSA AR-15 Stealth Stripped Lower Receiver", price: 59.99, oldPrice: 79.99, retailer: "Palmetto State Armory", category: "Parts", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 8.99, fflFee: 25, priceHistory: [89, 79, 69, 59.99, 59.99], inStock: false },
+    { id: 5, title: "Glock 43X MOS 9mm Pistol", price: 449.99, oldPrice: 499.99, retailer: "Sportsman's Warehouse", category: "Handguns", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.8, shipping: 14.99, fflFee: 25, priceHistory: [499, 479, 459, 449.99, 449.99], inStock: true },
+    { id: 6, title: "Hornady 5.56x45 55gr FMJ - 500 Rounds", price: 229.99, oldPrice: 269.99, retailer: "Target Sports USA", category: "Ammo", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.5, shipping: 0, fflFee: 0, priceHistory: [279, 259, 249, 229.99, 229.99], inStock: true },
   ];
 
-  let filteredDeals = deals.filter(deal => 
-    (selectedCategory === 'All' || deal.category === selectedCategory) &&
-    (deal.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-     deal.retailer.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  let filteredDeals = deals.filter(deal => {
+    const matchesCategory = selectedCategory === 'All' || deal.category === selectedCategory;
+    const matchesSearch = deal.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                         deal.retailer.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    // Price Range Filter
+    let matchesPrice = true;
+    if (priceRange !== 'all') {
+      const p = deal.price;
+      if (priceRange === 'under100') matchesPrice = p < 100;
+      else if (priceRange === '100-299') matchesPrice = p >= 100 && p <= 299;
+      else if (priceRange === '300-599') matchesPrice = p >= 300 && p <= 599;
+      else if (priceRange === '600-999') matchesPrice = p >= 600 && p <= 999;
+      else if (priceRange === '1000-1999') matchesPrice = p >= 1000 && p <= 1999;
+      else if (priceRange === '2000plus') matchesPrice = p >= 2000;
+    }
 
-  // Apply sorting
-  if (sortOption === 'price-low') {
-    filteredDeals = [...filteredDeals].sort((a, b) => a.price - b.price);
-  } else if (sortOption === 'price-high') {
-    filteredDeals = [...filteredDeals].sort((a, b) => b.price - a.price);
-  } else if (sortOption === 'discount') {
-    filteredDeals = [...filteredDeals].sort((a, b) => {
-      const discountA = a.oldPrice ? ((a.oldPrice - a.price) / a.oldPrice) * 100 : 0;
-      const discountB = b.oldPrice ? ((b.oldPrice - b.price) / b.oldPrice) * 100 : 0;
-      return discountB - discountA;
+    const matchesStock = !inStockOnly || deal.inStock;
+    const matchesShipping = !freeShippingOnly || deal.shipping === 0;
+
+    return matchesCategory && matchesSearch && matchesPrice && matchesStock && matchesShipping;
+  });
+
+  // Sorting
+  if (sortOption === 'price-low') filteredDeals.sort((a, b) => a.price - b.price);
+  else if (sortOption === 'price-high') filteredDeals.sort((a, b) => b.price - a.price);
+  else if (sortOption === 'discount') {
+    filteredDeals.sort((a, b) => {
+      const da = a.oldPrice ? ((a.oldPrice - a.price) / a.oldPrice) * 100 : 0;
+      const db = b.oldPrice ? ((b.oldPrice - b.price) / b.oldPrice) * 100 : 0;
+      return db - da;
     });
+  } else if (sortOption === 'newest') {
+    filteredDeals = [...filteredDeals].reverse();
   }
 
   const calculateTrueCost = (price: number, shipping: number, ffl: number) => 
@@ -146,28 +167,42 @@ export default function Home() {
             <div className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-500">🔍</div>
           </div>
 
-          <div className="w-full md:w-72">
-            <select
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value as any)}
-              className="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 text-lg focus:outline-none focus:border-orange-500"
-            >
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="discount">% Off: Highest First</option>
+          {/* Sort */}
+          <div className="w-full md:w-64">
+            <select value={sortOption} onChange={(e) => setSortOption(e.target.value as any)}
+              className="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 focus:outline-none focus:border-orange-500">
+              <option value="price-low">Sort: Price Low to High</option>
+              <option value="price-high">Sort: Price High to Low</option>
+              <option value="discount">Sort: % Off Highest</option>
+              <option value="newest">Sort: Newest First</option>
             </select>
           </div>
 
-          <div className="w-full md:w-72">
-            <input
-              type="text"
-              placeholder="ZIP Code for local stock"
-              className="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 text-lg focus:outline-none focus:border-orange-500"
-              value={zipCode}
-              onChange={(e) => setZipCode(e.target.value)}
-              maxLength={5}
-            />
+          {/* Price Range */}
+          <div className="w-full md:w-64">
+            <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)}
+              className="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 focus:outline-none focus:border-orange-500">
+              <option value="all">All Prices</option>
+              <option value="under100">Under $100</option>
+              <option value="100-299">$100 – $299</option>
+              <option value="300-599">$300 – $599</option>
+              <option value="600-999">$600 – $999</option>
+              <option value="1000-1999">$1,000 – $1,999</option>
+              <option value="2000plus">$2,000+</option>
+            </select>
           </div>
+        </div>
+
+        {/* Toggles */}
+        <div className="flex flex-wrap gap-6 mt-4 text-sm">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" checked={inStockOnly} onChange={(e) => setInStockOnly(e.target.checked)} className="w-5 h-5 accent-orange-500" />
+            <span>In Stock Only</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" checked={freeShippingOnly} onChange={(e) => setFreeShippingOnly(e.target.checked)} className="w-5 h-5 accent-orange-500" />
+            <span>Free Shipping Only</span>
+          </label>
         </div>
 
         <div className="flex flex-wrap gap-2 mt-6">
@@ -200,23 +235,9 @@ export default function Home() {
             const trendColor = getTrendColor(deal.priceHistory);
 
             return (
-              <div 
-                key={deal.id} 
-                className="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden hover:border-orange-500 transition-all relative"
-              >
-                <button
-                  onClick={() => toggleFavorite(deal.id)}
-                  className="absolute top-4 right-14 z-20 text-3xl"
-                >
-                  {isFavorite ? '❤️' : '♡'}
-                </button>
-
-                <button
-                  onClick={() => togglePriceAlert(deal)}
-                  className={`absolute top-4 right-4 z-20 text-2xl ${hasAlert ? 'text-yellow-400' : 'text-gray-400 hover:text-yellow-400'}`}
-                >
-                  {hasAlert ? '🔔' : '🔕'}
-                </button>
+              <div key={deal.id} className="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden hover:border-orange-500 transition-all relative">
+                <button onClick={() => toggleFavorite(deal.id)} className="absolute top-4 right-14 z-20 text-3xl">{isFavorite ? '❤️' : '♡'}</button>
+                <button onClick={() => togglePriceAlert(deal)} className={`absolute top-4 right-4 z-20 text-2xl ${hasAlert ? 'text-yellow-400' : 'text-gray-400 hover:text-yellow-400'}`}>{hasAlert ? '🔔' : '🔕'}</button>
 
                 <img src={deal.image} alt={deal.title} className="w-full h-48 object-cover bg-gray-800" />
 
@@ -232,24 +253,14 @@ export default function Home() {
                   <p className="text-sm text-gray-400 mb-3">{deal.retailer}</p>
                   <h3 className="font-medium leading-tight mb-4 line-clamp-2">{deal.title}</h3>
 
-                  {savings > 0 && (
-                    <div className="inline-block bg-green-600 text-white text-xs px-3 py-1 rounded-full mb-4">
-                      {savings}% OFF
-                    </div>
-                  )}
+                  {savings > 0 && <div className="inline-block bg-green-600 text-white text-xs px-3 py-1 rounded-full mb-4">{savings}% OFF</div>}
 
                   <div className="mb-5">
                     <p className="text-xs text-gray-500 mb-2">Price Trend (Last 5 Days)</p>
                     <div className="flex items-end gap-1 h-14 bg-gray-950 rounded-xl p-2 relative">
                       {deal.priceHistory.map((p, i) => (
-                        <div
-                          key={i}
-                          className={`${trendColor} hover:brightness-110 rounded-t flex-1 transition-all relative group`}
-                          style={{ height: `${(p / 500) * 100}%` }}
-                        >
-                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-30">
-                            ${p}
-                          </div>
+                        <div key={i} className={`${trendColor} hover:brightness-110 rounded-t flex-1 transition-all relative group`} style={{ height: `${(p / 500) * 100}%` }}>
+                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none z-30">${p}</div>
                         </div>
                       ))}
                     </div>
@@ -260,16 +271,10 @@ export default function Home() {
                       <span className="text-gray-400">True Cost (est.)</span>
                       <span className="font-bold text-orange-400">${trueCost}</span>
                     </div>
-                    <div className="text-xs text-gray-500">
-                      +${deal.shipping} shipping + ~${deal.fflFee} FFL
-                    </div>
+                    <div className="text-xs text-gray-500">+${deal.shipping} shipping + ~${deal.fflFee} FFL</div>
                   </div>
 
-                  <a
-                    href={deal.link}
-                    target="_blank"
-                    className="block w-full bg-orange-600 hover:bg-orange-500 text-center py-4 rounded-2xl font-medium transition-colors"
-                  >
+                  <a href={deal.link} target="_blank" className="block w-full bg-orange-600 hover:bg-orange-500 text-center py-4 rounded-2xl font-medium transition-colors">
                     Visit Deal →
                   </a>
                 </div>
