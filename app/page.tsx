@@ -75,8 +75,8 @@ export default function Home() {
     <div className="min-h-screen bg-gray-950 text-white">
       <header className="bg-black border-b border-gray-800 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <h1 className="text-3xl font-bold tracking-tight text-green-400">
-            My<span className="text-orange-500">GunDeals</span> - TEST VERSION
+          <h1 className="text-3xl font-bold tracking-tight">
+            My<span className="text-orange-500">GunDeals</span>
           </h1>
 
           <div className="hidden md:flex items-center gap-8 text-sm">
