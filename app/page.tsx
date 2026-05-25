@@ -51,12 +51,12 @@ export default function Home() {
   const categories = ['All', 'Rifles', 'Ammo', 'Optics', 'Handguns', 'Parts'];
 
   const deals = [
-    { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, oldPrice: 449.99, retailer: "Palmetto State Armory", category: "Rifles", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", rating: 4.8, shipping: 12.99, fflFee: 25 },
-    { id: 2, title: "Federal American Eagle 5.56x45 55gr FMJ - 420 Rounds", price: 189.99, oldPrice: 219.99, retailer: "Ammo.com", category: "Ammo", link: "https://ammo.com", image: "https://picsum.photos/id/1074/600/400", rating: 4.9, shipping: 19.99, fflFee: 0 },
-    { id: 3, title: "Holosun HS507C-X2 Red Dot Sight", price: 229.99, oldPrice: 259.99, retailer: "Primary Arms", category: "Optics", link: "https://primaryarms.com", image: "https://picsum.photos/id/201/600/400", rating: 4.7, shipping: 9.99, fflFee: 0 },
-    { id: 4, title: "PSA AR-15 Stealth Stripped Lower Receiver", price: 59.99, oldPrice: 79.99, retailer: "Palmetto State Armory", category: "Parts", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 8.99, fflFee: 25 },
-    { id: 5, title: "Glock 43X MOS 9mm Pistol", price: 449.99, oldPrice: 499.99, retailer: "Sportsman's Warehouse", category: "Handguns", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.8, shipping: 14.99, fflFee: 25 },
-    { id: 6, title: "Hornady 5.56x45 55gr FMJ - 500 Rounds", price: 229.99, oldPrice: 269.99, retailer: "Target Sports USA", category: "Ammo", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.5, shipping: 24.99, fflFee: 0 },
+    { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, oldPrice: 449.99, retailer: "Palmetto State Armory", category: "Rifles", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", rating: 4.8, shipping: 12.99, fflFee: 25, priceHistory: [459, 429, 449, 399, 399.99] },
+    { id: 2, title: "Federal American Eagle 5.56x45 55gr FMJ - 420 Rounds", price: 189.99, oldPrice: 219.99, retailer: "Ammo.com", category: "Ammo", link: "https://ammo.com", image: "https://picsum.photos/id/1074/600/400", rating: 4.9, shipping: 19.99, fflFee: 0, priceHistory: [229, 209, 199, 189.99, 189.99] },
+    { id: 3, title: "Holosun HS507C-X2 Red Dot Sight", price: 229.99, oldPrice: 259.99, retailer: "Primary Arms", category: "Optics", link: "https://primaryarms.com", image: "https://picsum.photos/id/201/600/400", rating: 4.7, shipping: 9.99, fflFee: 0, priceHistory: [259, 249, 239, 229.99, 229.99] },
+    { id: 4, title: "PSA AR-15 Stealth Stripped Lower Receiver", price: 59.99, oldPrice: 79.99, retailer: "Palmetto State Armory", category: "Parts", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 8.99, fflFee: 25, priceHistory: [89, 79, 69, 59.99, 59.99] },
+    { id: 5, title: "Glock 43X MOS 9mm Pistol", price: 449.99, oldPrice: 499.99, retailer: "Sportsman's Warehouse", category: "Handguns", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.8, shipping: 14.99, fflFee: 25, priceHistory: [499, 479, 459, 449.99, 449.99] },
+    { id: 6, title: "Hornady 5.56x45 55gr FMJ - 500 Rounds", price: 229.99, oldPrice: 269.99, retailer: "Target Sports USA", category: "Ammo", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.5, shipping: 24.99, fflFee: 0, priceHistory: [279, 259, 249, 229.99, 229.99] },
   ];
 
   const filteredDeals = deals.filter(deal => 
@@ -181,11 +181,7 @@ export default function Home() {
                   {hasAlert ? '🔔' : '🔕'}
                 </button>
 
-                <img 
-                  src={deal.image} 
-                  alt={deal.title} 
-                  className="w-full h-48 object-cover bg-gray-800" 
-                />
+                <img src={deal.image} alt={deal.title} className="w-full h-48 object-cover bg-gray-800" />
 
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-2">
@@ -204,6 +200,21 @@ export default function Home() {
                       {savings}% OFF
                     </div>
                   )}
+
+                  {/* Price History Chart */}
+                  <div className="mb-5">
+                    <p className="text-xs text-gray-500 mb-2">Price Trend (Last 5 Days)</p>
+                    <div className="flex items-end gap-1 h-12 bg-gray-950 rounded-xl p-2">
+                      {deal.priceHistory.map((p, i) => (
+                        <div
+                          key={i}
+                          className="bg-orange-500 rounded-t flex-1 transition-all hover:bg-orange-400"
+                          style={{ height: `${(p / 500) * 100}%` }}
+                          title={`$${p}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
 
                   <div className="bg-gray-950 border border-gray-700 rounded-2xl p-4 mb-5 text-sm">
                     <div className="flex justify-between mb-1">
