@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [sortOption, setSortOption] = useState<'price-low' | 'price-high' | 'discount'>('price-low');
   const [zipCode, setZipCode] = useState('');
   const [favorites, setFavorites] = useState<number[]>([]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -59,11 +60,24 @@ export default function Home() {
     { id: 6, title: "Hornady 5.56x45 55gr FMJ - 500 Rounds", price: 229.99, oldPrice: 269.99, retailer: "Target Sports USA", category: "Ammo", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.5, shipping: 24.99, fflFee: 0, priceHistory: [279, 259, 249, 229.99, 229.99] },
   ];
 
-  const filteredDeals = deals.filter(deal => 
+  let filteredDeals = deals.filter(deal => 
     (selectedCategory === 'All' || deal.category === selectedCategory) &&
     (deal.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
      deal.retailer.toLowerCase().includes(searchTerm.toLowerCase()))
   );
+
+  // Apply sorting
+  if (sortOption === 'price-low') {
+    filteredDeals = [...filteredDeals].sort((a, b) => a.price - b.price);
+  } else if (sortOption === 'price-high') {
+    filteredDeals = [...filteredDeals].sort((a, b) => b.price - a.price);
+  } else if (sortOption === 'discount') {
+    filteredDeals = [...filteredDeals].sort((a, b) => {
+      const discountA = a.oldPrice ? ((a.oldPrice - a.price) / a.oldPrice) * 100 : 0;
+      const discountB = b.oldPrice ? ((b.oldPrice - b.price) / b.oldPrice) * 100 : 0;
+      return discountB - discountA;
+    });
+  }
 
   const calculateTrueCost = (price: number, shipping: number, ffl: number) => 
     (price + shipping + ffl).toFixed(2);
@@ -75,9 +89,9 @@ export default function Home() {
     if (history.length < 2) return 'bg-orange-500';
     const first = history[0];
     const last = history[history.length - 1];
-    if (last < first * 0.97) return 'bg-green-500';   // Downward = Good
-    if (last > first * 1.03) return 'bg-red-500';     // Upward = Bad
-    return 'bg-orange-500';                           // Stable
+    if (last < first * 0.97) return 'bg-green-500';
+    if (last > first * 1.03) return 'bg-red-500';
+    return 'bg-orange-500';
   };
 
   return (
@@ -131,6 +145,19 @@ export default function Home() {
             />
             <div className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-500">🔍</div>
           </div>
+
+          <div className="w-full md:w-72">
+            <select
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value as any)}
+              className="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-5 text-lg focus:outline-none focus:border-orange-500"
+            >
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="discount">% Off: Highest First</option>
+            </select>
+          </div>
+
           <div className="w-full md:w-72">
             <input
               type="text"
@@ -211,7 +238,6 @@ export default function Home() {
                     </div>
                   )}
 
-                  {/* Color-Coded Price History */}
                   <div className="mb-5">
                     <p className="text-xs text-gray-500 mb-2">Price Trend (Last 5 Days)</p>
                     <div className="flex items-end gap-1 h-14 bg-gray-950 rounded-xl p-2 relative">
