@@ -87,8 +87,6 @@ export default function Home() {
     { id: 20, title: "Blue Force Gear Vickers Sling", price: 69.99, oldPrice: 79.99, retailer: "MidwayUSA", category: "Parts", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.9, shipping: 0, fflFee: 0, priceHistory: [79.99, 74.99, 69.99, 69.99, 69.99], inStock: true },
   ];
 
-  // ... (rest of the filtering and return logic remains the same as the previous version)
-
   let filteredDeals = deals.filter(deal => {
     const matchesCategory = selectedCategory === 'All' || deal.category === selectedCategory;
     const matchesSearch = deal.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -140,7 +138,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
-      {/* Header, Search, Filters, and Toggles are the same as previous version */}
       <header className="bg-black border-b border-gray-800 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <h1 className="text-3xl font-bold tracking-tight">
@@ -238,6 +235,9 @@ export default function Home() {
             const hasAlert = alerts.some(a => a.id === deal.id);
             const trendColor = getTrendColor(deal.priceHistory);
 
+            // Dynamic max for better scaling
+            const maxPrice = Math.max(...deal.priceHistory);
+
             return (
               <div key={deal.id} className="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden hover:border-orange-500 transition-all relative">
                 <button onClick={() => toggleFavorite(deal.id)} className="absolute top-4 right-14 z-20 text-3xl">{isFavorite ? '❤️' : '♡'}</button>
@@ -263,8 +263,14 @@ export default function Home() {
                     <p className="text-xs text-gray-500 mb-2">Price Trend (Last 5 Days)</p>
                     <div className="flex items-end gap-1 h-14 bg-gray-950 rounded-xl p-2 relative">
                       {deal.priceHistory.map((p, i) => (
-                        <div key={i} className={`${trendColor} hover:brightness-110 rounded-t flex-1 transition-all relative group`} style={{ height: `${(p / 500) * 100}%` }}>
-                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-30">${p}</div>
+                        <div 
+                          key={i} 
+                          className={`${trendColor} hover:brightness-110 rounded-t flex-1 transition-all relative group`} 
+                          style={{ height: `${(p / maxPrice) * 100}%` }}
+                        >
+                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-30">
+                            ${p}
+                          </div>
                         </div>
                       ))}
                     </div>
