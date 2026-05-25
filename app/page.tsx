@@ -201,17 +201,21 @@ export default function Home() {
                     </div>
                   )}
 
-                  {/* Price History Chart */}
+                  {/* Improved Price History Chart with Hover Tooltips */}
                   <div className="mb-5">
                     <p className="text-xs text-gray-500 mb-2">Price Trend (Last 5 Days)</p>
-                    <div className="flex items-end gap-1 h-12 bg-gray-950 rounded-xl p-2">
+                    <div className="flex items-end gap-1 h-14 bg-gray-950 rounded-xl p-2 relative">
                       {deal.priceHistory.map((p, i) => (
                         <div
                           key={i}
-                          className="bg-orange-500 rounded-t flex-1 transition-all hover:bg-orange-400"
+                          className="bg-orange-500 hover:bg-orange-400 rounded-t flex-1 transition-all relative group"
                           style={{ height: `${(p / 500) * 100}%` }}
-                          title={`$${p}`}
-                        />
+                        >
+                          {/* Hover Tooltip */}
+                          <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-30">
+                            ${p}
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
