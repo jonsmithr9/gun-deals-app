@@ -118,7 +118,7 @@ export default function Home() {
     oldPrice ? Math.round(((oldPrice - price) / oldPrice) * 100) : 0;
 
   const getBarColor = (prev: number, current: number) => {
-    if (Math.abs(current - prev) < 0.5) return 'bg-yellow-400'; // Bright bumblebee yellow for stable
+    if (Math.abs(current - prev) < 0.5) return 'bg-yellow-300'; // Bright bumblebee yellow
     return current < prev ? 'bg-green-500' : 'bg-red-500';
   };
 
@@ -254,7 +254,7 @@ export default function Home() {
                     <div className="flex items-end gap-1 h-14 bg-gray-950 rounded-xl p-2 relative">
                       {deal.priceHistory.map((p, i) => {
                         const prev = i > 0 ? deal.priceHistory[i-1] : p;
-                        const barColor = Math.abs(p - prev) < 0.5 ? 'bg-yellow-400' : (p < prev ? 'bg-green-500' : 'bg-red-500');
+                        const barColor = Math.abs(p - prev) < 0.5 ? 'bg-yellow-300' : (p < prev ? 'bg-green-500' : 'bg-red-500');
                         return (
                           <div 
                             key={i} 
