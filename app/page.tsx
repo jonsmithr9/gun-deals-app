@@ -118,7 +118,7 @@ export default function Home() {
     oldPrice ? Math.round(((oldPrice - price) / oldPrice) * 100) : 0;
 
   const getBarColor = (prev: number, current: number) => {
-    if (Math.abs(current - prev) < 0.5) return 'bg-yellow-200'; // Very bright bumblebee yellow
+    if (Math.abs(current - prev) < 0.5) return 'bg-yellow-300'; // Very bright bumblebee yellow
     return current < prev ? 'bg-green-500' : 'bg-red-500';
   };
 
