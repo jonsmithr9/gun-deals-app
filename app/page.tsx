@@ -71,6 +71,15 @@ export default function Home() {
   const percentOff = (oldPrice: number | undefined, price: number) => 
     oldPrice ? Math.round(((oldPrice - price) / oldPrice) * 100) : 0;
 
+  const getTrendColor = (history: number[]) => {
+    if (history.length < 2) return 'bg-orange-500';
+    const first = history[0];
+    const last = history[history.length - 1];
+    if (last < first) return 'bg-green-500';      // Downward = Good
+    if (last > first) return 'bg-red-500';        // Upward = Bad
+    return 'bg-orange-500';                       // Stable
+  };
+
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <header className="bg-black border-b border-gray-800 sticky top-0 z-50">
@@ -161,6 +170,7 @@ export default function Home() {
             const savings = percentOff(deal.oldPrice, deal.price);
             const isFavorite = favorites.includes(deal.id);
             const hasAlert = alerts.some(a => a.id === deal.id);
+            const trendColor = getTrendColor(deal.priceHistory);
 
             return (
               <div 
@@ -201,17 +211,16 @@ export default function Home() {
                     </div>
                   )}
 
-                  {/* Improved Price History Chart with Hover Tooltips */}
+                  {/* Improved Color-Coded Price History */}
                   <div className="mb-5">
                     <p className="text-xs text-gray-500 mb-2">Price Trend (Last 5 Days)</p>
                     <div className="flex items-end gap-1 h-14 bg-gray-950 rounded-xl p-2 relative">
                       {deal.priceHistory.map((p, i) => (
                         <div
                           key={i}
-                          className="bg-orange-500 hover:bg-orange-400 rounded-t flex-1 transition-all relative group"
+                          className={`${trendColor} hover:brightness-110 rounded-t flex-1 transition-all relative group`}
                           style={{ height: `${(p / 500) * 100}%` }}
                         >
-                          {/* Hover Tooltip */}
                           <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-30">
                             ${p}
                           </div>
