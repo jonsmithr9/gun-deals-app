@@ -75,9 +75,9 @@ export default function Home() {
     if (history.length < 2) return 'bg-orange-500';
     const first = history[0];
     const last = history[history.length - 1];
-    if (last < first * 0.97) return 'bg-green-500';      // Clear downward trend
-    if (last > first * 1.03) return 'bg-red-500';        // Clear upward trend
-    return 'bg-orange-500';                              // Stable / mixed
+    if (last < first * 0.97) return 'bg-green-500';      // Downward trend
+    if (last > first * 1.03) return 'bg-red-500';        // Upward trend
+    return 'bg-orange-500';                              // Stable
   };
 
   return (
