@@ -64,27 +64,25 @@ export default function Home() {
     { id: 3, title: "Daniel Defense DDM4 V7 5.56", price: 1899.99, oldPrice: 1799.99, retailer: "Primary Arms", category: "Rifles", link: "#", image: "https://picsum.photos/id/201/600/400", rating: 4.9, shipping: 19.99, fflFee: 25, priceHistory: [1699, 1749, 1799, 1849, 1899.99], inStock: true },
     { id: 4, title: "Vortex Viper PST Gen II 3-15x44", price: 699.99, oldPrice: 649.99, retailer: "MidwayUSA", category: "Optics", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.9, shipping: 0, fflFee: 0, priceHistory: [599, 629, 659, 679, 699.99], inStock: true },
 
-    // Orange (stable)
+    // Yellow (stable)
     { id: 5, title: "Holosun HS507C-X2 Red Dot", price: 229.99, oldPrice: 239.99, retailer: "Primary Arms", category: "Optics", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.8, shipping: 0, fflFee: 0, priceHistory: [229.99, 229.99, 229.99, 229.99, 229.99], inStock: true },
     { id: 6, title: "Magpul MOE Carbine Stock", price: 44.99, oldPrice: 49.99, retailer: "Primary Arms", category: "Parts", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.8, shipping: 8.99, fflFee: 0, priceHistory: [44.99, 44.99, 44.99, 44.99, 44.99], inStock: true },
 
-    // Mixed colors
+    // Mixed
     { id: 7, title: "Sig Sauer P320 Compact 9mm", price: 449.99, oldPrice: 479.99, retailer: "Sportsman's Warehouse", category: "Handguns", link: "#", image: "https://picsum.photos/id/201/600/400", rating: 4.7, shipping: 0, fflFee: 25, priceHistory: [489, 469, 459, 439, 449.99], inStock: true },
     { id: 8, title: "Federal American Eagle 5.56 - 420 Rounds", price: 189.99, oldPrice: 219.99, retailer: "Ammo.com", category: "Ammo", link: "#", image: "https://picsum.photos/id/1074/600/400", rating: 4.8, shipping: 0, fflFee: 0, priceHistory: [229, 199, 219, 179.99, 189.99], inStock: true },
     { id: 9, title: "Streamlight TLR-7A Weapon Light", price: 139.99, oldPrice: 159.99, retailer: "Palmetto State Armory", category: "Parts", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.7, shipping: 0, fflFee: 0, priceHistory: [159, 149, 139.99, 139.99, 139.99], inStock: true },
-
-    // More variety
     { id: 10, title: "Ruger AR-556 5.56 NATO Rifle", price: 689.99, oldPrice: 749.99, retailer: "Sportsman's Warehouse", category: "Rifles", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.7, shipping: 14.99, fflFee: 25, priceHistory: [749, 719, 699, 689.99, 689.99], inStock: true },
     { id: 11, title: "Smith & Wesson Shield Plus 9mm", price: 379.99, oldPrice: 429.99, retailer: "Palmetto State Armory", category: "Handguns", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.8, shipping: 9.99, fflFee: 25, priceHistory: [429, 409, 389, 379.99, 379.99], inStock: true },
     { id: 12, title: "EOTech EXPS3-0 Holographic Sight", price: 599.99, oldPrice: 649.99, retailer: "Palmetto State Armory", category: "Optics", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.7, shipping: 12.99, fflFee: 0, priceHistory: [649, 629, 609, 599.99, 599.99], inStock: true },
-    { id: 13, title: "Hornady 9mm 115gr FMJ - 500 Rounds", price: 149.99, oldPrice: 169.99, retailer: "Target Sports USA", category: "Ammo", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.7, shipping: 0, fflFee: 0, priceHistory: [179, 169, 159, 149.99, 149.99], inStock: true },
-    { id: 14, title: "Blazer Brass 9mm 124gr - 1000 Rounds", price: 289.99, oldPrice: 319.99, retailer: "Palmetto State Armory", category: "Ammo", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 24.99, fflFee: 0, priceHistory: [319, 299, 289.99, 289.99, 289.99], inStock: false },
-    { id: 15, title: "Blue Force Gear Vickers Sling", price: 69.99, oldPrice: 79.99, retailer: "MidwayUSA", category: "Parts", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.9, shipping: 0, fflFee: 0, priceHistory: [79.99, 74.99, 69.99, 69.99, 69.99], inStock: true },
-    { id: 16, title: "PSA AR-15 Stealth Stripped Lower Receiver", price: 59.99, oldPrice: 79.99, retailer: "Palmetto State Armory", category: "Parts", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 8.99, fflFee: 25, priceHistory: [89, 79, 69, 59.99, 59.99], inStock: true },
-    { id: 17, title: "Sig Sauer Romeo5 Red Dot", price: 129.99, oldPrice: 149.99, retailer: "Sportsman's Warehouse", category: "Optics", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.6, shipping: 0, fflFee: 0, priceHistory: [149, 139, 129.99, 129.99, 129.99], inStock: true },
-    { id: 18, title: "Federal American Eagle 5.56 - 420 Rounds", price: 189.99, oldPrice: 219.99, retailer: "Ammo.com", category: "Ammo", link: "#", image: "https://picsum.photos/id/1074/600/400", rating: 4.8, shipping: 0, fflFee: 0, priceHistory: [229, 199, 219, 179.99, 189.99], inStock: true },
-    { id: 19, title: "Winchester White Box 5.56 55gr - 300 Rounds", price: 139.99, oldPrice: 159.99, retailer: "MidwayUSA", category: "Ammo", link: "#", image: "https://picsum.photos/id/1015/600/400", rating: 4.5, shipping: 19.99, fflFee: 0, priceHistory: [159, 149, 139.99, 139.99, 139.99], inStock: true },
-    { id: 20, title: "Ruger LCP II .380 ACP", price: 249.99, oldPrice: 289.99, retailer: "Ammo.com", category: "Handguns", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.5, shipping: 8.99, fflFee: 25, priceHistory: [289, 269, 259, 249.99, 249.99], inStock: false },
+    { id: 13, title: "Sig Sauer Romeo5 Red Dot", price: 129.99, oldPrice: 149.99, retailer: "Sportsman's Warehouse", category: "Optics", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.6, shipping: 0, fflFee: 0, priceHistory: [149, 139, 129.99, 129.99, 129.99], inStock: true },
+    { id: 14, title: "Hornady 9mm 115gr FMJ - 500 Rounds", price: 149.99, oldPrice: 169.99, retailer: "Target Sports USA", category: "Ammo", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.7, shipping: 0, fflFee: 0, priceHistory: [179, 169, 159, 149.99, 149.99], inStock: true },
+    { id: 15, title: "Blazer Brass 9mm 124gr - 1000 Rounds", price: 289.99, oldPrice: 319.99, retailer: "Palmetto State Armory", category: "Ammo", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 24.99, fflFee: 0, priceHistory: [319, 299, 289.99, 289.99, 289.99], inStock: false },
+    { id: 16, title: "Winchester White Box 5.56 55gr - 300 Rounds", price: 139.99, oldPrice: 159.99, retailer: "MidwayUSA", category: "Ammo", link: "#", image: "https://picsum.photos/id/1015/600/400", rating: 4.5, shipping: 19.99, fflFee: 0, priceHistory: [159, 149, 139.99, 139.99, 139.99], inStock: true },
+    { id: 17, title: "Blue Force Gear Vickers Sling", price: 69.99, oldPrice: 79.99, retailer: "MidwayUSA", category: "Parts", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.9, shipping: 0, fflFee: 0, priceHistory: [79.99, 74.99, 69.99, 69.99, 69.99], inStock: true },
+    { id: 18, title: "PSA AR-15 Stealth Stripped Lower Receiver", price: 59.99, oldPrice: 79.99, retailer: "Palmetto State Armory", category: "Parts", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 8.99, fflFee: 25, priceHistory: [89, 79, 69, 59.99, 59.99], inStock: true },
+    { id: 19, title: "Ruger LCP II .380 ACP", price: 249.99, oldPrice: 289.99, retailer: "Ammo.com", category: "Handguns", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.5, shipping: 8.99, fflFee: 25, priceHistory: [289, 269, 259, 249.99, 249.99], inStock: false },
+    { id: 20, title: "Sig Sauer Romeo5 Red Dot", price: 129.99, oldPrice: 149.99, retailer: "Sportsman's Warehouse", category: "Optics", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.6, shipping: 0, fflFee: 0, priceHistory: [149, 139, 129.99, 129.99, 129.99], inStock: true },
   ];
 
   let filteredDeals = deals.filter(deal => {
@@ -127,7 +125,7 @@ export default function Home() {
     oldPrice ? Math.round(((oldPrice - price) / oldPrice) * 100) : 0;
 
   const getBarColor = (prev: number, current: number) => {
-    if (Math.abs(current - prev) < 0.5) return 'bg-orange-500'; // Stable
+    if (Math.abs(current - prev) < 0.5) return 'bg-yellow-500'; // Stable
     return current < prev ? 'bg-green-500' : 'bg-red-500';
   };
 
@@ -263,7 +261,7 @@ export default function Home() {
                     <div className="flex items-end gap-1 h-14 bg-gray-950 rounded-xl p-2 relative">
                       {deal.priceHistory.map((p, i) => {
                         const prev = i > 0 ? deal.priceHistory[i-1] : p;
-                        const barColor = prev === p ? 'bg-orange-500' : (p < prev ? 'bg-green-500' : 'bg-red-500');
+                        const barColor = Math.abs(p - prev) < 0.5 ? 'bg-yellow-500' : (p < prev ? 'bg-green-500' : 'bg-red-500');
                         return (
                           <div 
                             key={i} 
