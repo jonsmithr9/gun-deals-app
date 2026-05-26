@@ -11,26 +11,20 @@ export default function ProductPage() {
   const [productDeals, setProductDeals] = useState<any[]>([]);
   const [productInfo, setProductInfo] = useState<any>(null);
 
-  // Expanded mock data with multiple retailers per product
   const allDeals = [
-    // PSA Freedom Carbine - 3 retailers
     { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, retailer: "Palmetto State Armory", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", shipping: 12.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
     { id: 21, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 419.99, retailer: "Sportsman's Warehouse", link: "#", image: "https://picsum.photos/id/1015/600/400", shipping: 14.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
     { id: 22, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 389.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/1015/600/400", shipping: 9.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
 
-    // Glock 19 - 3 retailers
     { id: 2, title: "Glock 19 Gen5 9mm Pistol", price: 499.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/180/600/400", shipping: 12.99, fflFee: 25, upc: "764503036958", sku: "G19-GEN5", inStock: true },
     { id: 23, title: "Glock 19 Gen5 9mm Pistol", price: 519.99, retailer: "Sportsman's Warehouse", link: "#", image: "https://picsum.photos/id/180/600/400", shipping: 0, fflFee: 25, upc: "764503036958", sku: "G19-GEN5", inStock: true },
-    { id: 24, title: "Glock 19 Gen5 9mm Pistol", price: 489.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/180/600/400", shipping: 14.99, fflFee: 25, upc: "764503036958", sku: "G19-GEN5", inStock: true },
 
-    // Daniel Defense - 2 retailers
     { id: 3, title: "Daniel Defense DDM4 V7 5.56", price: 1899.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/201/600/400", shipping: 19.99, fflFee: 25, upc: "815604018289", sku: "DDM4V7", inStock: true },
-    { id: 25, title: "Daniel Defense DDM4 V7 5.56", price: 1929.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/201/600/400", shipping: 24.99, fflFee: 25, upc: "815604018289", sku: "DDM4V7", inStock: true },
 
-    // Add more products as needed...
-    { id: 4, title: "Smith & Wesson M&P15 Sport II", price: 549.99, retailer: "GunBroker", link: "#", image: "https://picsum.photos/id/106/600/400", shipping: 15.99, fflFee: 25, upc: "022188869217", sku: "MP15-SPORT2", inStock: false },
-    { id: 5, title: "Sig Sauer MCX Virtus Patrol", price: 2299.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 24.99, fflFee: 25, upc: "798681617456", sku: "MCX-VIRTUS", inStock: true },
-    { id: 6, title: "Holosun HS507C-X2 Red Dot", price: 229.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/201/600/400", shipping: 0, fflFee: 0, upc: "605930624694", sku: "HS507C-X2", inStock: true },
+    { id: 9, title: "Magpul MOE Carbine Stock", price: 44.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/180/600/400", shipping: 8.99, fflFee: 0, upc: "873750007915", sku: "MAG400", inStock: true },
+    { id: 26, title: "Magpul MOE Carbine Stock", price: 49.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/180/600/400", shipping: 9.99, fflFee: 0, upc: "873750007915", sku: "MAG400", inStock: true },
+
+    { id: 10, title: "Streamlight TLR-7A Weapon Light", price: 139.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 0, fflFee: 0, upc: "080926694019", sku: "TLR-7A", inStock: true },
   ];
 
   useEffect(() => {
@@ -88,7 +82,7 @@ export default function ProductPage() {
           <img 
             src={productInfo?.image} 
             alt={productInfo?.title} 
-            className="w-full md:w-80 h-64 md:h-80 object-cover rounded-3xl bg-gray-800 flex-shrink-0" 
+            className="w-full md:w-80 h-64 md:h-80 object-cover rounded-3xl bg-gray-800" 
           />
           <div className="flex-1">
             <h1 className="text-3xl font-bold mb-4">{productInfo?.title}</h1>
@@ -115,10 +109,8 @@ export default function ProductPage() {
                     {deal.inStock ? '✅ IN STOCK' : '❌ OUT OF STOCK'}
                   </div>
                 </div>
-
-                <p className="font-medium text-lg">{deal.retailer}</p>
-
-                <a href={deal.link} target="_blank" className="mt-6 block w-full bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-center py-4 rounded-2xl font-medium transition-colors">
+                <p className="font-medium">{deal.retailer}</p>
+                <a href={deal.link} target="_blank" className="mt-6 block w-full bg-orange-600 hover:bg-orange-500 text-center py-4 rounded-2xl font-medium">
                   Visit Deal →
                 </a>
               </div>
