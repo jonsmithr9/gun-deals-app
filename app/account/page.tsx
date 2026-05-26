@@ -19,6 +19,7 @@ export default function AccountPage() {
     localStorage.removeItem('user');
     setUser(null);
     setIsLoggedIn(false);
+    window.location.href = '/';
   };
 
   if (!isLoggedIn) {
@@ -26,7 +27,7 @@ export default function AccountPage() {
       <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center p-4">
         <div className="max-w-md w-full text-center">
           <h1 className="text-4xl font-bold mb-4">My Account</h1>
-          <p className="text-gray-400 mb-8">Sign in to save favorites, set alerts, and find local FFLs near you.</p>
+          <p className="text-gray-400 mb-8">Sign in to save favorites, set alerts, and find local FFLs.</p>
           <div className="space-y-4">
             <Link href="/auth/signin" className="block w-full bg-orange-600 hover:bg-orange-500 py-4 rounded-2xl font-medium">
               Sign In
@@ -45,7 +46,9 @@ export default function AccountPage() {
       <div className="max-w-2xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Account Settings</h1>
-          <button onClick={handleLogout} className="text-red-400 hover:text-red-500">Sign Out</button>
+          <Link href="/" className="text-orange-400 hover:text-orange-300 flex items-center gap-2">
+            ← Back to Deals
+          </Link>
         </div>
 
         <div className="bg-gray-900 rounded-3xl p-8 mb-8">
@@ -73,7 +76,7 @@ export default function AccountPage() {
 
             <div>
               <h3 className="font-medium mb-4">Notification Preferences</h3>
-              <div className="space-y-4">
+              <div className="space-y-4 text-sm">
                 <label className="flex items-center gap-3 cursor-pointer">
                   <input type="checkbox" defaultChecked className="w-5 h-5 accent-orange-500" />
                   <span>Email me when price alerts are triggered</span>
@@ -95,6 +98,13 @@ export default function AccountPage() {
             🔔 My Price Alerts
           </Link>
         </div>
+
+        <button 
+          onClick={handleLogout}
+          className="mt-8 w-full bg-red-600/10 hover:bg-red-600/20 text-red-400 py-4 rounded-2xl font-medium border border-red-900/50"
+        >
+          Sign Out
+        </button>
       </div>
     </div>
   );

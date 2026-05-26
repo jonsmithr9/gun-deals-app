@@ -21,22 +21,22 @@ export default function SignInPage() {
     if (savedUser) {
       const user = JSON.parse(savedUser);
       if (user.email === email) {
-        router.push('/account');
+        router.push('/'); // Go to home page on sign in
         return;
       }
     }
 
-    // Demo mode - auto create if not exists
+    // Demo fallback
     const demoUser = {
       id: Date.now(),
       name: "Demo User",
-      email: email,
+      email: email || "user@example.com",
       zipCode: "50266",
       createdAt: new Date().toISOString()
     };
     
     localStorage.setItem('user', JSON.stringify(demoUser));
-    router.push('/account');
+    router.push('/'); // Go to home page
   };
 
   return (
@@ -44,7 +44,7 @@ export default function SignInPage() {
       <div className="max-w-md w-full">
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold mb-2">Welcome Back</h1>
-          <p className="text-gray-400">Sign in to access your deals and alerts</p>
+          <p className="text-gray-400">Sign in to access your favorites and alerts</p>
         </div>
 
         <form onSubmit={handleSignIn} className="bg-gray-900 rounded-3xl p-8 space-y-6">
