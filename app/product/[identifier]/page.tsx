@@ -46,7 +46,8 @@ export default function ProductPage() {
       setProductInfo({
         title: matchingDeals[0].title,
         upc: matchingDeals[0].upc,
-        sku: matchingDeals[0].sku
+        sku: matchingDeals[0].sku,
+        image: matchingDeals[0].image
       });
     }
   }, [identifier]);
@@ -86,38 +87,44 @@ export default function ProductPage() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 pt-8 pb-12">
-        <h1 className="text-3xl font-bold mb-2">{productInfo?.title}</h1>
-        <div className="text-gray-400 mb-8 space-y-1">
-          {productInfo?.upc && <p>UPC: {productInfo.upc}</p>}
-          {productInfo?.sku && <p>SKU: {productInfo.sku}</p>}
+        {/* Main Product Header */}
+        <div className="flex flex-col md:flex-row gap-8 mb-10">
+          <img 
+            src={productInfo?.image} 
+            alt={productInfo?.title} 
+            className="w-full md:w-96 h-64 md:h-80 object-cover rounded-3xl bg-gray-800" 
+          />
+          <div>
+            <h1 className="text-3xl font-bold mb-4">{productInfo?.title}</h1>
+            <div className="text-gray-400 space-y-2 text-lg">
+              {productInfo?.upc && <p><span className="text-gray-500">UPC:</span> {productInfo.upc}</p>}
+              {productInfo?.sku && <p><span className="text-gray-500">SKU:</span> {productInfo.sku}</p>}
+            </div>
+          </div>
         </div>
 
-        <h2 className="text-xl font-semibold mb-6">Available Deals ({sortedDeals.length})</h2>
+        <h2 className="text-xl font-semibold mb-6">Available from {sortedDeals.length} Retailers</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedDeals.map((deal) => {
             const trueCost = calculateTrueCost(deal.price, deal.shipping, deal.fflFee);
             return (
-              <div key={deal.id} className="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/10 transition-all">
-                <img src={deal.image} alt={deal.title} className="w-full h-48 object-cover bg-gray-800" />
-
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-3">
-                    <div>
-                      <p className="text-3xl font-bold text-orange-400">${deal.price}</p>
-                      <p className="text-sm text-gray-400">True Cost: <span className="font-bold text-orange-400">${trueCost}</span></p>
-                    </div>
-                    <div className={`px-3 py-1 text-xs font-bold rounded-full ${deal.inStock ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}>
-                      {deal.inStock ? '✅ IN STOCK' : '❌ OUT OF STOCK'}
-                    </div>
+              <div key={deal.id} className="bg-gray-900 border border-gray-800 rounded-3xl p-6 hover:border-orange-500 transition-all">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <p className="text-3xl font-bold text-orange-400">${deal.price}</p>
+                    <p className="text-sm text-gray-400">True Cost ≈ <span className="font-bold text-orange-400">${trueCost}</span></p>
                   </div>
-
-                  <p className="text-sm text-gray-400 mb-4">{deal.retailer}</p>
-
-                  <a href={deal.link} target="_blank" className="block w-full bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-center py-4 rounded-2xl font-medium transition-colors">
-                    Visit Deal →
-                  </a>
+                  <div className={`px-3 py-1 text-xs font-bold rounded-full ${deal.inStock ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}>
+                    {deal.inStock ? '✅ IN STOCK' : '❌ OUT OF STOCK'}
+                  </div>
                 </div>
+
+                <p className="font-medium text-lg mb-6">{deal.retailer}</p>
+
+                <a href={deal.link} target="_blank" className="block w-full bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-center py-4 rounded-2xl font-medium transition-colors">
+                  Visit Deal →
+                </a>
               </div>
             );
           })}
