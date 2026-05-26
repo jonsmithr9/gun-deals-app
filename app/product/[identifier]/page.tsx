@@ -82,23 +82,22 @@ export default function ProductPage() {
             My<span className="text-orange-500">GunDeals</span>
           </h1>
 
-          <div className="hidden md:block">
-            <Link href="/" className="text-orange-400 hover:text-orange-300">
-              ← Back to All Deals
-            </Link>
-          </div>
+          {/* Back link - visible on all sizes except very small mobile */}
+          <Link href="/" className="hidden sm:block text-orange-400 hover:text-orange-300 text-sm font-medium">
+            ← Back to All Deals
+          </Link>
 
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-            className="md:hidden text-3xl p-2 focus:outline-none active:scale-95 transition-transform"
+            className="sm:hidden text-3xl p-2 focus:outline-none active:scale-95 transition-transform"
           >
             {isMobileMenuOpen ? '✕' : '☰'}
           </button>
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-800 bg-black px-4 py-6 flex flex-col gap-4 text-lg">
-            <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>Deals</Link>
+          <div className="sm:hidden border-t border-gray-800 bg-black px-4 py-6 flex flex-col gap-4 text-lg">
+            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="py-2">← Back to All Deals</Link>
             <Link href="/alerts" onClick={() => setIsMobileMenuOpen(false)}>🔔 Alerts</Link>
             <Link href="/favorites" onClick={() => setIsMobileMenuOpen(false)}>❤️ Favorites</Link>
             <Link href="/account" onClick={() => setIsMobileMenuOpen(false)}>👤 Account</Link>
