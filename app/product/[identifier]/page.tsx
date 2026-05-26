@@ -82,6 +82,12 @@ export default function ProductPage() {
             My<span className="text-orange-500">GunDeals</span>
           </h1>
 
+          <div className="hidden md:block">
+            <Link href="/" className="text-orange-400 hover:text-orange-300">
+              ← Back to All Deals
+            </Link>
+          </div>
+
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
             className="md:hidden text-3xl p-2 focus:outline-none active:scale-95 transition-transform"
