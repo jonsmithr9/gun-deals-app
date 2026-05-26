@@ -12,19 +12,56 @@ export default function ProductPage() {
   const [productInfo, setProductInfo] = useState<any>(null);
 
   const allDeals = [
+    // PSA Freedom Carbine
     { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, retailer: "Palmetto State Armory", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", shipping: 12.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
     { id: 21, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 419.99, retailer: "Sportsman's Warehouse", link: "#", image: "https://picsum.photos/id/1015/600/400", shipping: 14.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
     { id: 22, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 389.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/1015/600/400", shipping: 9.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
 
+    // Glock 19 Gen5
     { id: 2, title: "Glock 19 Gen5 9mm Pistol", price: 499.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/180/600/400", shipping: 12.99, fflFee: 25, upc: "764503036958", sku: "G19-GEN5", inStock: true },
     { id: 23, title: "Glock 19 Gen5 9mm Pistol", price: 519.99, retailer: "Sportsman's Warehouse", link: "#", image: "https://picsum.photos/id/180/600/400", shipping: 0, fflFee: 25, upc: "764503036958", sku: "G19-GEN5", inStock: true },
+    { id: 24, title: "Glock 19 Gen5 9mm Pistol", price: 489.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/180/600/400", shipping: 14.99, fflFee: 25, upc: "764503036958", sku: "G19-GEN5", inStock: true },
 
+    // Daniel Defense DDM4 V7
     { id: 3, title: "Daniel Defense DDM4 V7 5.56", price: 1899.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/201/600/400", shipping: 19.99, fflFee: 25, upc: "815604018289", sku: "DDM4V7", inStock: true },
 
+    // Magpul MOE Carbine Stock
     { id: 9, title: "Magpul MOE Carbine Stock", price: 44.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/180/600/400", shipping: 8.99, fflFee: 0, upc: "873750007915", sku: "MAG400", inStock: true },
     { id: 26, title: "Magpul MOE Carbine Stock", price: 49.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/180/600/400", shipping: 9.99, fflFee: 0, upc: "873750007915", sku: "MAG400", inStock: true },
 
+    // Streamlight TLR-7A
     { id: 10, title: "Streamlight TLR-7A Weapon Light", price: 139.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 0, fflFee: 0, upc: "080926694019", sku: "TLR-7A", inStock: true },
+
+    // Sig Sauer Romeo5 Red Dot
+    { id: 14, title: "Sig Sauer Romeo5 Red Dot", price: 129.99, retailer: "Sportsman's Warehouse", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 0, fflFee: 0, upc: "798681600083", sku: "ROMEO5", inStock: true },
+    { id: 27, title: "Sig Sauer Romeo5 Red Dot", price: 119.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 0, fflFee: 0, upc: "798681600083", sku: "ROMEO5", inStock: true },
+
+    // Holosun HS507C-X2
+    { id: 6, title: "Holosun HS507C-X2 Red Dot", price: 229.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/201/600/400", shipping: 0, fflFee: 0, upc: "605930624694", sku: "HS507C-X2", inStock: true },
+
+    // Smith & Wesson Shield Plus
+    { id: 11, title: "Smith & Wesson Shield Plus 9mm", price: 379.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/106/600/400", shipping: 9.99, fflFee: 25, upc: "022188879469", sku: "SHIELD-PLUS", inStock: true },
+
+    // Ruger LCP II
+    { id: 12, title: "Ruger LCP II .380 ACP", price: 249.99, retailer: "Ammo.com", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 8.99, fflFee: 25, upc: "736676037124", sku: "LCP-II", inStock: false },
+
+    // EOTech EXPS3-0
+    { id: 13, title: "EOTech EXPS3-0 Holographic Sight", price: 599.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/106/600/400", shipping: 12.99, fflFee: 0, upc: "672294526551", sku: "EXPS3-0", inStock: true },
+
+    // Vortex Viper PST Gen II
+    { id: 7, title: "Vortex Viper PST Gen II 3-15x44", price: 699.99, retailer: "MidwayUSA", link: "#", image: "https://picsum.photos/id/106/600/400", shipping: 0, fflFee: 0, upc: "875874008595", sku: "PST-3151", inStock: true },
+
+    // Smith & Wesson M&P15 Sport II
+    { id: 4, title: "Smith & Wesson M&P15 Sport II", price: 549.99, retailer: "GunBroker", link: "#", image: "https://picsum.photos/id/106/600/400", shipping: 15.99, fflFee: 25, upc: "022188869217", sku: "MP15-SPORT2", inStock: false },
+
+    // Sig Sauer MCX Virtus Patrol
+    { id: 5, title: "Sig Sauer MCX Virtus Patrol", price: 2299.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 24.99, fflFee: 25, upc: "798681617456", sku: "MCX-VIRTUS", inStock: true },
+
+    // Federal American Eagle 5.56
+    { id: 8, title: "Federal American Eagle 5.56 - 420 Rounds", price: 189.99, retailer: "Ammo.com", link: "#", image: "https://picsum.photos/id/1074/600/400", shipping: 0, fflFee: 0, upc: "029465062354", sku: "AE556", inStock: true },
+
+    // Hornady 9mm 115gr FMJ
+    { id: 15, title: "Hornady 9mm 115gr FMJ - 500 Rounds", price: 149.99, retailer: "Target Sports USA", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 0, fflFee: 0, upc: "090255912357", sku: "HORN-9MM-500", inStock: true },
   ];
 
   useEffect(() => {
@@ -82,7 +119,7 @@ export default function ProductPage() {
           <img 
             src={productInfo?.image} 
             alt={productInfo?.title} 
-            className="w-full md:w-80 h-64 md:h-80 object-cover rounded-3xl bg-gray-800" 
+            className="w-full md:w-80 h-64 md:h-80 object-cover rounded-3xl bg-gray-800 flex-shrink-0" 
           />
           <div className="flex-1">
             <h1 className="text-3xl font-bold mb-4">{productInfo?.title}</h1>
