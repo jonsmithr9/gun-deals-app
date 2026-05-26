@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 export default function SignUpPage() {
   const router = useRouter();
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [zipCode, setZipCode] = useState('');
@@ -18,46 +18,42 @@ export default function SignUpPage() {
     setLoading(true);
     setError('');
 
-    // Simple validation
-    if (!name || !email || !password || !zipCode) {
+    if (!username || !email || !password || !zipCode) {
       setError('Please fill in all fields');
       setLoading(false);
       return;
     }
 
-    // Create user object
     const newUser = {
       id: Date.now(),
-      name,
+      username,
       email,
       zipCode,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      // Future fields can be added here
     };
 
-    // Save to localStorage (temporary - will be replaced with real auth later)
     localStorage.setItem('user', JSON.stringify(newUser));
-
-    // Redirect to account page
-    router.push('/account');
+    router.push('/'); // Go directly to home after signup
   };
 
   return (
     <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold mb-2">Create Account</h1>
-          <p className="text-gray-400">Join MyGunDeals to save favorites and get alerts</p>
+          <h1 className="text-4xl font-bold mb-2">Join MyGunDeals</h1>
+          <p className="text-gray-400">Create an account to save favorites, set alerts, and join the community</p>
         </div>
 
         <form onSubmit={handleSignUp} className="bg-gray-900 rounded-3xl p-8 space-y-6">
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Full Name</label>
+            <label className="block text-sm text-gray-400 mb-2">Username</label>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full bg-gray-800 border border-gray-700 rounded-2xl px-5 py-4 focus:outline-none focus:border-orange-500"
-              placeholder="John Smith"
+              placeholder="GunNut42"
               required
             />
           </div>
@@ -97,7 +93,7 @@ export default function SignUpPage() {
               maxLength={5}
               required
             />
-            <p className="text-xs text-gray-500 mt-2">Used to find nearby FFL dealers</p>
+            <p className="text-xs text-gray-500 mt-2">Helps us show nearby FFL dealers and local deals</p>
           </div>
 
           {error && <p className="text-red-400 text-sm">{error}</p>}
