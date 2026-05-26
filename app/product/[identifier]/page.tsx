@@ -12,7 +12,7 @@ export default function ProductPage() {
   const [productInfo, setProductInfo] = useState<any>(null);
 
   const allDeals = [
-    // PSA Freedom Carbine
+    // PSA 16" 5.56 NATO Freedom Carbine
     { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, retailer: "Palmetto State Armory", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", shipping: 12.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
     { id: 21, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 419.99, retailer: "Sportsman's Warehouse", link: "#", image: "https://picsum.photos/id/1015/600/400", shipping: 14.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
     { id: 22, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 389.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/1015/600/400", shipping: 9.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
@@ -62,6 +62,9 @@ export default function ProductPage() {
 
     // Hornady 9mm 115gr FMJ
     { id: 15, title: "Hornady 9mm 115gr FMJ - 500 Rounds", price: 149.99, retailer: "Target Sports USA", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 0, fflFee: 0, upc: "090255912357", sku: "HORN-9MM-500", inStock: true },
+
+    // Winchester White Box (added)
+    { id: 16, title: "Winchester White Box 9mm 115gr FMJ - 500 Rounds", price: 159.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/1074/600/400", shipping: 0, fflFee: 0, upc: "020892226449", sku: "WWB-9MM-500", inStock: true },
   ];
 
   useEffect(() => {
