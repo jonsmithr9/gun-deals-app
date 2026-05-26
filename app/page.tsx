@@ -11,28 +11,41 @@ export default function Home() {
   const [inStockOnly, setInStockOnly] = useState(false);
   const [freeShippingOnly, setFreeShippingOnly] = useState(false);
   
-  const [zipCode, setZipCode] = useState('');
   const [favorites, setFavorites] = useState<number[]>([]);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [alerts, setAlerts] = useState<any[]>([]);
   const [showAlertToast, setShowAlertToast] = useState(false);
   const [alertedDeal, setAlertedDeal] = useState('');
+  const [user, setUser] = useState<any>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Load user and their saved data
   useEffect(() => {
-    const savedFavorites = localStorage.getItem('favorites');
-    if (savedFavorites) setFavorites(JSON.parse(savedFavorites));
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      const parsedUser = JSON.parse(savedUser);
+      setUser(parsedUser);
 
-    const savedAlerts = localStorage.getItem('priceAlerts');
-    if (savedAlerts) setAlerts(JSON.parse(savedAlerts));
+      const userFavorites = localStorage.getItem(`favorites_${parsedUser.id}`);
+      if (userFavorites) setFavorites(JSON.parse(userFavorites));
+
+      const userAlerts = localStorage.getItem(`alerts_${parsedUser.id}`);
+      if (userAlerts) setAlerts(JSON.parse(userAlerts));
+    }
   }, []);
 
+  // Save favorites to user account
   useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
+    if (user) {
+      localStorage.setItem(`favorites_${user.id}`, JSON.stringify(favorites));
+    }
+  }, [favorites, user]);
 
+  // Save alerts to user account
   useEffect(() => {
-    localStorage.setItem('priceAlerts', JSON.stringify(alerts));
-  }, [alerts]);
+    if (user) {
+      localStorage.setItem(`alerts_${user.id}`, JSON.stringify(alerts));
+    }
+  }, [alerts, user]);
 
   const toggleFavorite = (id: number) => {
     if (favorites.includes(id)) {
@@ -248,7 +261,6 @@ export default function Home() {
                   <p className="text-sm text-gray-400 mb-3">{deal.retailer}</p>
                   <h3 className="font-medium leading-tight mb-4 line-clamp-2">{deal.title}</h3>
 
-                  {/* Clickable UPC and SKU */}
                   <div className="text-[10px] text-gray-500 mb-4 space-y-1">
                     {deal.upc && (
                       <Link href={`/product/${deal.upc}`} className="hover:text-orange-400 hover:underline cursor-pointer block">
