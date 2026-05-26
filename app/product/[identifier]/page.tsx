@@ -12,7 +12,7 @@ export default function ProductPage() {
   const [productInfo, setProductInfo] = useState<any>(null);
 
   const allDeals = [
-    // PSA 16" 5.56 NATO Freedom Carbine
+    // PSA Freedom Carbine
     { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, retailer: "Palmetto State Armory", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", shipping: 12.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
     { id: 21, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 419.99, retailer: "Sportsman's Warehouse", link: "#", image: "https://picsum.photos/id/1015/600/400", shipping: 14.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
     { id: 22, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 389.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/1015/600/400", shipping: 9.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
@@ -22,7 +22,7 @@ export default function ProductPage() {
     { id: 23, title: "Glock 19 Gen5 9mm Pistol", price: 519.99, retailer: "Sportsman's Warehouse", link: "#", image: "https://picsum.photos/id/180/600/400", shipping: 0, fflFee: 25, upc: "764503036958", sku: "G19-GEN5", inStock: true },
     { id: 24, title: "Glock 19 Gen5 9mm Pistol", price: 489.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/180/600/400", shipping: 14.99, fflFee: 25, upc: "764503036958", sku: "G19-GEN5", inStock: true },
 
-    // Daniel Defense DDM4 V7
+    // Daniel Defense
     { id: 3, title: "Daniel Defense DDM4 V7 5.56", price: 1899.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/201/600/400", shipping: 19.99, fflFee: 25, upc: "815604018289", sku: "DDM4V7", inStock: true },
 
     // Magpul MOE Carbine Stock
@@ -32,7 +32,7 @@ export default function ProductPage() {
     // Streamlight TLR-7A
     { id: 10, title: "Streamlight TLR-7A Weapon Light", price: 139.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 0, fflFee: 0, upc: "080926694019", sku: "TLR-7A", inStock: true },
 
-    // Sig Sauer Romeo5 Red Dot
+    // Sig Sauer Romeo5
     { id: 14, title: "Sig Sauer Romeo5 Red Dot", price: 129.99, retailer: "Sportsman's Warehouse", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 0, fflFee: 0, upc: "798681600083", sku: "ROMEO5", inStock: true },
     { id: 27, title: "Sig Sauer Romeo5 Red Dot", price: 119.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 0, fflFee: 0, upc: "798681600083", sku: "ROMEO5", inStock: true },
 
@@ -54,17 +54,19 @@ export default function ProductPage() {
     // Smith & Wesson M&P15 Sport II
     { id: 4, title: "Smith & Wesson M&P15 Sport II", price: 549.99, retailer: "GunBroker", link: "#", image: "https://picsum.photos/id/106/600/400", shipping: 15.99, fflFee: 25, upc: "022188869217", sku: "MP15-SPORT2", inStock: false },
 
-    // Sig Sauer MCX Virtus Patrol
+    // Sig Sauer MCX Virtus
     { id: 5, title: "Sig Sauer MCX Virtus Patrol", price: 2299.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 24.99, fflFee: 25, upc: "798681617456", sku: "MCX-VIRTUS", inStock: true },
 
-    // Federal American Eagle 5.56
+    // Federal American Eagle
     { id: 8, title: "Federal American Eagle 5.56 - 420 Rounds", price: 189.99, retailer: "Ammo.com", link: "#", image: "https://picsum.photos/id/1074/600/400", shipping: 0, fflFee: 0, upc: "029465062354", sku: "AE556", inStock: true },
 
-    // Hornady 9mm 115gr FMJ
+    // Hornady 9mm
     { id: 15, title: "Hornady 9mm 115gr FMJ - 500 Rounds", price: 149.99, retailer: "Target Sports USA", link: "#", image: "https://picsum.photos/id/107/600/400", shipping: 0, fflFee: 0, upc: "090255912357", sku: "HORN-9MM-500", inStock: true },
 
-    // Winchester White Box (added)
-    { id: 16, title: "Winchester White Box 9mm 115gr FMJ - 500 Rounds", price: 159.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/1074/600/400", shipping: 0, fflFee: 0, upc: "020892226449", sku: "WWB-9MM-500", inStock: true },
+    // Winchester White Box - Matching your link
+    { id: 16, title: "Winchester White Box 9mm 115gr FMJ - 500 Rounds", price: 159.99, retailer: "Palmetto State Armory", link: "#", image: "https://picsum.photos/id/1074/600/400", shipping: 0, fflFee: 0, upc: "020892226449", sku: "WWB-556-300", inStock: true },
+    { id: 28, title: "Winchester White Box 9mm 115gr FMJ - 500 Rounds", price: 154.99, retailer: "Sportsman's Warehouse", link: "#", image: "https://picsum.photos/id/1074/600/400", shipping: 0, fflFee: 0, upc: "020892226449", sku: "WWB-556-300", inStock: true },
+    { id: 29, title: "Winchester White Box 9mm 115gr FMJ - 500 Rounds", price: 149.99, retailer: "Primary Arms", link: "#", image: "https://picsum.photos/id/1074/600/400", shipping: 0, fflFee: 0, upc: "020892226449", sku: "WWB-556-300", inStock: true },
   ];
 
   useEffect(() => {
@@ -119,11 +121,7 @@ export default function ProductPage() {
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 pt-8 pb-12">
         <div className="flex flex-col md:flex-row gap-8 mb-10">
-          <img 
-            src={productInfo?.image} 
-            alt={productInfo?.title} 
-            className="w-full md:w-80 h-64 md:h-80 object-cover rounded-3xl bg-gray-800 flex-shrink-0" 
-          />
+          <img src={productInfo?.image} alt={productInfo?.title} className="w-full md:w-80 h-64 md:h-80 object-cover rounded-3xl bg-gray-800 flex-shrink-0" />
           <div className="flex-1">
             <h1 className="text-3xl font-bold mb-4">{productInfo?.title}</h1>
             <div className="text-gray-400 space-y-2">
