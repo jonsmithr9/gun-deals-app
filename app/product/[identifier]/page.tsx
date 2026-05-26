@@ -11,6 +11,7 @@ export default function ProductPage() {
 
   const [productDeals, setProductDeals] = useState<any[]>([]);
   const [productInfo, setProductInfo] = useState<any>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const allDeals = [
     { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, retailer: "Palmetto State Armory", category: "Rifles", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", rating: 4.8, shipping: 12.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
@@ -80,10 +81,23 @@ export default function ProductPage() {
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
             My<span className="text-orange-500">GunDeals</span>
           </h1>
-          <Link href="/" className="text-orange-400 hover:text-orange-300">
-            ← Back to All Deals
-          </Link>
+
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+            className="md:hidden text-3xl p-2 focus:outline-none active:scale-95 transition-transform"
+          >
+            {isMobileMenuOpen ? '✕' : '☰'}
+          </button>
         </div>
+
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-gray-800 bg-black px-4 py-6 flex flex-col gap-4 text-lg">
+            <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>Deals</Link>
+            <Link href="/alerts" onClick={() => setIsMobileMenuOpen(false)}>🔔 Alerts</Link>
+            <Link href="/favorites" onClick={() => setIsMobileMenuOpen(false)}>❤️ Favorites</Link>
+            <Link href="/account" onClick={() => setIsMobileMenuOpen(false)}>👤 Account</Link>
+          </div>
+        )}
       </header>
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 pt-8 pb-12">
@@ -92,11 +106,11 @@ export default function ProductPage() {
           <img 
             src={productInfo?.image} 
             alt={productInfo?.title} 
-            className="w-full md:w-96 h-64 md:h-80 object-cover rounded-3xl bg-gray-800" 
+            className="w-full md:w-80 h-64 md:h-80 object-cover rounded-3xl bg-gray-800 flex-shrink-0" 
           />
-          <div>
+          <div className="flex-1">
             <h1 className="text-3xl font-bold mb-4">{productInfo?.title}</h1>
-            <div className="text-gray-400 space-y-2 text-lg">
+            <div className="text-gray-400 space-y-2">
               {productInfo?.upc && <p><span className="text-gray-500">UPC:</span> {productInfo.upc}</p>}
               {productInfo?.sku && <p><span className="text-gray-500">SKU:</span> {productInfo.sku}</p>}
             </div>
@@ -105,14 +119,14 @@ export default function ProductPage() {
 
         <h2 className="text-xl font-semibold mb-6">Available from {sortedDeals.length} Retailers</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {sortedDeals.map((deal) => {
             const trueCost = calculateTrueCost(deal.price, deal.shipping, deal.fflFee);
             return (
-              <div key={deal.id} className="bg-gray-900 border border-gray-800 rounded-3xl p-6 hover:border-orange-500 transition-all">
+              <div key={deal.id} className="bg-gray-900 border border-gray-800 rounded-3xl p-5 hover:border-orange-500 transition-all">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <p className="text-3xl font-bold text-orange-400">${deal.price}</p>
+                    <p className="text-2xl font-bold text-orange-400">${deal.price}</p>
                     <p className="text-sm text-gray-400">True Cost ≈ <span className="font-bold text-orange-400">${trueCost}</span></p>
                   </div>
                   <div className={`px-3 py-1 text-xs font-bold rounded-full ${deal.inStock ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}`}>
@@ -120,9 +134,9 @@ export default function ProductPage() {
                   </div>
                 </div>
 
-                <p className="font-medium text-lg mb-6">{deal.retailer}</p>
+                <p className="font-medium">{deal.retailer}</p>
 
-                <a href={deal.link} target="_blank" className="block w-full bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-center py-4 rounded-2xl font-medium transition-colors">
+                <a href={deal.link} target="_blank" className="mt-5 block w-full bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-center py-3.5 rounded-2xl font-medium transition-colors text-sm">
                   Visit Deal →
                 </a>
               </div>
