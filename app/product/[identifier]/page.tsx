@@ -13,27 +13,26 @@ export default function ProductPage() {
   const [productInfo, setProductInfo] = useState<any>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Expanded mock data - multiple retailers per product
   const allDeals = [
+    // PSA Freedom Carbine - Multiple retailers
     { id: 1, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 399.99, retailer: "Palmetto State Armory", category: "Rifles", link: "https://palmettostatearmory.com", image: "https://picsum.photos/id/1015/600/400", rating: 4.8, shipping: 12.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
+    { id: 21, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 419.99, retailer: "Sportsman's Warehouse", category: "Rifles", link: "#", image: "https://picsum.photos/id/1015/600/400", rating: 4.6, shipping: 14.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
+    { id: 22, title: "PSA 16\" 5.56 NATO Freedom Carbine", price: 389.99, retailer: "Primary Arms", category: "Rifles", link: "#", image: "https://picsum.photos/id/1015/600/400", rating: 4.7, shipping: 9.99, fflFee: 25, upc: "123456789012", sku: "PSA-556-FREEDOM", inStock: true },
+
+    // Glock 19
     { id: 2, title: "Glock 19 Gen5 9mm Pistol", price: 499.99, retailer: "Primary Arms", category: "Handguns", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.9, shipping: 12.99, fflFee: 25, upc: "764503036958", sku: "G19-GEN5", inStock: true },
+    { id: 23, title: "Glock 19 Gen5 9mm Pistol", price: 519.99, retailer: "Sportsman's Warehouse", category: "Handguns", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.7, shipping: 0, fflFee: 25, upc: "764503036958", sku: "G19-GEN5", inStock: true },
+    { id: 24, title: "Glock 19 Gen5 9mm Pistol", price: 489.99, retailer: "Palmetto State Armory", category: "Handguns", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.8, shipping: 14.99, fflFee: 25, upc: "764503036958", sku: "G19-GEN5", inStock: true },
+
+    // Daniel Defense
     { id: 3, title: "Daniel Defense DDM4 V7 5.56", price: 1899.99, retailer: "Primary Arms", category: "Rifles", link: "#", image: "https://picsum.photos/id/201/600/400", rating: 4.9, shipping: 19.99, fflFee: 25, upc: "815604018289", sku: "DDM4V7", inStock: true },
+    { id: 25, title: "Daniel Defense DDM4 V7 5.56", price: 1929.99, retailer: "Palmetto State Armory", category: "Rifles", link: "#", image: "https://picsum.photos/id/201/600/400", rating: 4.8, shipping: 24.99, fflFee: 25, upc: "815604018289", sku: "DDM4V7", inStock: true },
+
+    // Add more products as needed...
     { id: 4, title: "Smith & Wesson M&P15 Sport II", price: 549.99, retailer: "GunBroker", category: "Rifles", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.6, shipping: 15.99, fflFee: 25, upc: "022188869217", sku: "MP15-SPORT2", inStock: false },
     { id: 5, title: "Sig Sauer MCX Virtus Patrol", price: 2299.99, retailer: "Palmetto State Armory", category: "Rifles", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.8, shipping: 24.99, fflFee: 25, upc: "798681617456", sku: "MCX-VIRTUS", inStock: true },
     { id: 6, title: "Holosun HS507C-X2 Red Dot", price: 229.99, retailer: "Primary Arms", category: "Optics", link: "#", image: "https://picsum.photos/id/201/600/400", rating: 4.8, shipping: 0, fflFee: 0, upc: "605930624694", sku: "HS507C-X2", inStock: true },
-    { id: 7, title: "Vortex Viper PST Gen II 3-15x44", price: 699.99, retailer: "MidwayUSA", category: "Optics", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.9, shipping: 0, fflFee: 0, upc: "875874008595", sku: "PST-3151", inStock: true },
-    { id: 8, title: "Federal American Eagle 5.56 - 420 Rounds", price: 189.99, retailer: "Ammo.com", category: "Ammo", link: "#", image: "https://picsum.photos/id/1074/600/400", rating: 4.8, shipping: 0, fflFee: 0, upc: "029465062354", sku: "AE556", inStock: true },
-    { id: 9, title: "Magpul MOE Carbine Stock", price: 44.99, retailer: "Primary Arms", category: "Parts", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.8, shipping: 8.99, fflFee: 0, upc: "873750007915", sku: "MAG400", inStock: true },
-    { id: 10, title: "Streamlight TLR-7A Weapon Light", price: 139.99, retailer: "Palmetto State Armory", category: "Parts", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.7, shipping: 0, fflFee: 0, upc: "080926694019", sku: "TLR-7A", inStock: true },
-    { id: 11, title: "Smith & Wesson Shield Plus 9mm", price: 379.99, retailer: "Palmetto State Armory", category: "Handguns", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.8, shipping: 9.99, fflFee: 25, upc: "022188879469", sku: "SHIELD-PLUS", inStock: true },
-    { id: 12, title: "Ruger LCP II .380 ACP", price: 249.99, retailer: "Ammo.com", category: "Handguns", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.5, shipping: 8.99, fflFee: 25, upc: "736676037124", sku: "LCP-II", inStock: false },
-    { id: 13, title: "EOTech EXPS3-0 Holographic Sight", price: 599.99, retailer: "Palmetto State Armory", category: "Optics", link: "#", image: "https://picsum.photos/id/106/600/400", rating: 4.7, shipping: 12.99, fflFee: 0, upc: "672294526551", sku: "EXPS3-0", inStock: true },
-    { id: 14, title: "Sig Sauer Romeo5 Red Dot", price: 129.99, retailer: "Sportsman's Warehouse", category: "Optics", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.6, shipping: 0, fflFee: 0, upc: "798681600083", sku: "ROMEO5", inStock: true },
-    { id: 15, title: "Hornady 9mm 115gr FMJ - 500 Rounds", price: 149.99, retailer: "Target Sports USA", category: "Ammo", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.7, shipping: 0, fflFee: 0, upc: "090255912357", sku: "HORN-9MM-500", inStock: true },
-    { id: 16, title: "Blazer Brass 9mm 124gr - 1000 Rounds", price: 289.99, retailer: "Palmetto State Armory", category: "Ammo", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 24.99, fflFee: 0, upc: "", sku: "", inStock: false },
-    { id: 17, title: "Winchester White Box 5.56 55gr - 300 Rounds", price: 139.99, retailer: "MidwayUSA", category: "Ammo", link: "#", image: "https://picsum.photos/id/1015/600/400", rating: 4.5, shipping: 19.99, fflFee: 0, upc: "", sku: "WWB-556-300", inStock: true },
-    { id: 18, title: "PSA AR-15 Stealth Stripped Lower Receiver", price: 59.99, retailer: "Palmetto State Armory", category: "Parts", link: "#", image: "https://picsum.photos/id/180/600/400", rating: 4.6, shipping: 8.99, fflFee: 25, upc: "", sku: "", inStock: true },
-    { id: 19, title: "Ruger LCP II .380 ACP", price: 249.99, retailer: "Ammo.com", category: "Handguns", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.5, shipping: 8.99, fflFee: 25, upc: "736676037124", sku: "", inStock: false },
-    { id: 20, title: "Sig Sauer Romeo5 Red Dot", price: 129.99, retailer: "Sportsman's Warehouse", category: "Optics", link: "#", image: "https://picsum.photos/id/107/600/400", rating: 4.6, shipping: 0, fflFee: 0, upc: "", sku: "", inStock: true },
   ];
 
   useEffect(() => {
@@ -82,7 +81,6 @@ export default function ProductPage() {
             My<span className="text-orange-500">GunDeals</span>
           </h1>
 
-          {/* Back link - visible on all sizes except very small mobile */}
           <Link href="/" className="hidden sm:block text-orange-400 hover:text-orange-300 text-sm font-medium">
             ← Back to All Deals
           </Link>
@@ -97,7 +95,7 @@ export default function ProductPage() {
 
         {isMobileMenuOpen && (
           <div className="sm:hidden border-t border-gray-800 bg-black px-4 py-6 flex flex-col gap-4 text-lg">
-            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="py-2">← Back to All Deals</Link>
+            <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>← Back to All Deals</Link>
             <Link href="/alerts" onClick={() => setIsMobileMenuOpen(false)}>🔔 Alerts</Link>
             <Link href="/favorites" onClick={() => setIsMobileMenuOpen(false)}>❤️ Favorites</Link>
             <Link href="/account" onClick={() => setIsMobileMenuOpen(false)}>👤 Account</Link>
@@ -139,9 +137,9 @@ export default function ProductPage() {
                   </div>
                 </div>
 
-                <p className="font-medium">{deal.retailer}</p>
+                <p className="font-medium text-lg mb-1">{deal.retailer}</p>
 
-                <a href={deal.link} target="_blank" className="mt-5 block w-full bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-center py-3.5 rounded-2xl font-medium transition-colors text-sm">
+                <a href={deal.link} target="_blank" className="mt-6 block w-full bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-center py-4 rounded-2xl font-medium transition-colors">
                   Visit Deal →
                 </a>
               </div>
